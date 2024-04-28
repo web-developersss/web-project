@@ -8,11 +8,11 @@
 
 #category {
     padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    flex-grow: 1; /* Allow the select element to grow to fill the available space */
-    margin-right: 10px; /* Add some space between the select and the form */
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 15px;
+    flex-grow: 1; 
+   width: 350px;
 }
 
 #category:focus {
@@ -20,13 +20,29 @@
     border-color: #007bff; /* Change border color when focused */
 }
 
+#checkbox {
+
+margin-top: 25px;
+
+}
+#submit{
+    margin-left: 15px;
+   width: 100px;
+   padding: 3px;
+   font-size: 17px;
+   
+}
+
 form {
     margin-right: 10px; /* Add margin between the form and the next element */
+  
 }
 
 label {
     margin-right: 5px; /* Add margin between the label and the checkbox */
+    font-size: 25px;
 }
+
 
 
 .restaurants {
@@ -37,38 +53,28 @@ label {
 }
 .restaurant {
     background: white;
-    border: 1px solid #ddd;
+    border: 1px solid black;
     padding: 20px;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 15px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
 }
 .restaurant h3 {
     color: #333;
+    font-family: 'Times New Roman' ;
 }
 .restaurant span {
     font-size: 50px;
+  
+}
+.restaurant:hover{
+    transform: translateY(-10px); /* Moves the card up by 10 pixels /
+    cursor: pointer; / Changes the cursor to indicate it's clickable */
 }
 
 
-.card {
-    background: #fff;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: center;
-    width: calc(33% - 40px);
-    margin: 20px;
-}
-.card .icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-.card h3 {
-    margin-bottom: .5rem;
-    font-size: 1.2rem;
-}
+
 .restaurant-img img {
     max-width: 100%;
     border-radius: 8px;
@@ -99,4 +105,28 @@ label {
 }
 
 
+
+.moving-text-container {
+    position: relative;
+    width: 100%;
+    height: 100px; /* Set height as needed */
+    overflow: hidden; /* Hide overflowing text */
+}
+
+.moving-text {
+    position: absolute;
+    animation: moveText 10s linear infinite;
+    font-size: 30px;
+    white-space: nowrap;
+    margin-right: 20px; 
+}
+
+@keyframes moveText {
+    0% {
+        transform: translateX(0); /* Start position */
+    }
+    100% {
+        transform: translateX(90vw); /* End position */
+    }
+}
 
