@@ -130,3 +130,20 @@ label {
     }
 }
 
+.navbar {
+    overflow: hidden;
+    background-color: rgba(51, 51, 51, 0.5); /* Semi-transparent background */
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 998; /* Lower than the openbtn */
+    text-align: right; /* Align the text to the right */
+}
+
+.navbar a {
+    display: inline-block; /* Inline block for alignment */
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}

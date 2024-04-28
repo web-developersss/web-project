@@ -1,34 +1,29 @@
 body {
-    background-image: url('https://img.freepik.com/free-photo/gold-cutlery-set-black-background_1220-4099.jpg');
+    background-image: url('https://www.efinancialmodels.com/wp-content/uploads/2024/04/20240409-162147.webp');
     background-size: cover;
     background-repeat: no-repeat;
-    font-family: 'Helvetica Neue', sans-serif;
+    height: 100vh;
     margin: 0;
-    padding: 0;
-    color: #fff; /* White text color */
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    height: 100vh; /* Full height of the viewport */
+}
+
+h1 {
+    color: black;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 70px;
+    margin-bottom: 20px;
 }
 
 .container {
-    width: 450px; 
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 450px;
     padding: 20px;
-    background-color: black;
-    border-radius: 8px;
-    border: 2px solid #B8860B;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    margin: 30px;
-}
-
-
-h1 {
-    font-size: 24px; /* Adjust size as necessary */
-    text-align: center;
-    color: #B8860B; /* Gold color for the heading */
-    font-weight: normal; /* Adjust based on the font-weight in the image */
-    margin-bottom: 30px; /* Add some space below the heading */
+    margin: 90px auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 form {
@@ -37,69 +32,70 @@ form {
     align-items: center;
 }
 
-label {
-    display: block;
-    margin-bottom: 10px;
-    color:   #B8860B;
-    width: 100%;
-    float: left; /* Float the labels to the left */
- 
-}
-
 input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="tel"],
 select {
-    width: calc(100% - 20px); /* Full width minus padding */
+    width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 20px;
-    background-color: #333; /* Slightly lighter black for inputs */
-    border: 1px solid  #B8860B;/* Gold border */
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 5px;
-    color:  #B8860B;
+    border: none;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: black;
+    font-size: 20px;
 }
 
 input[type="submit"] {
-    width: calc(100% - 20px);
+    width: calc(80% - 20px);
     padding: 10px;
     border: none;
-    border-radius: 5px;
-    background-color:  #B8860B; /* Gold background for submit */
-    color: #000; /* Black text color for submit */
+    border-radius: 20px;
+    background-color: dimgrey;
+    color: white;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 input[type="submit"]:hover {
-    background-color:   #B8860B; /* Darker gold on hover */
-}
-
-option {
-    color: #000; /* Black option text color */
-}
-
-/* Additional styles for placeholder to match design */
-::placeholder {
-    color: #bfbfbf; /* Light grey placeholder text */
-}
-
-/* Remove default styles from browsers */
-input, select {
-    outline: none;
-}
-
-/* Style focus state of inputs */
-input:focus, select:focus {
-    border: 1px solid   #B8860B;
     background-color: #444;
 }
-#line {
-    width: 100%;
-    height: 1px;
-    background-color:  #B8860B;
+
+a {
+    color: black;
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #333;
+}
+
+.password-container {
+    position: relative;
+}
+
+#show-password-btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
     border: none;
-    margin-bottom:20px;
-    
+    background: none;
+    cursor: pointer;
+}
+
+#password[type="text"] {
+    -webkit-text-security: none;
+    -moz-text-security: none;
+    text-security: none;
 }
