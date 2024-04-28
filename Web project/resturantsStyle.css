@@ -3,10 +3,13 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px; /* Add bottom margin */
+    position: relative;
+    display: inline-block;
 }
 
 
 #category {
+    margin-top: 40px;
     padding: 8px;
     font-size: 20px;
     border: 1px solid black;
@@ -30,7 +33,7 @@ margin-top: 25px;
    width: 100px;
    padding: 3px;
    font-size: 17px;
-   
+   border-radius: 10px;
 }
 
 form {
@@ -60,9 +63,10 @@ label {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: transform 0.3s;
 }
-.restaurant h3 {
+.restaurant u {
     color: #333;
-    font-family: 'Times New Roman' ;
+  font-size: 25px;
+    
 }
 .restaurant span {
     font-size: 50px;
@@ -104,29 +108,75 @@ label {
     margin-bottom: 20px; /* Add bottom margin */
 }
 
-
-
 .moving-text-container {
-    position: relative;
-    width: 100%;
-    height: 100px; /* Set height as needed */
-    overflow: hidden; /* Hide overflowing text */
+    white-space: nowrap; /* Prevent text from wrapping */
+    
 }
 
 .moving-text {
-    position: absolute;
-    animation: moveText 10s linear infinite;
-    font-size: 30px;
-    white-space: nowrap;
-    margin-right: 20px; 
+    font-size: 25px;
+    display: inline-block; /* Make text move next to each other */
+    margin-right: 40px; /* Adjust spacing between texts */
+    animation: moveText 10s linear infinite; /* Apply animation to move text */
 }
 
 @keyframes moveText {
-    0% {
-        transform: translateX(0); /* Start position */
-    }
-    100% {
-        transform: translateX(90vw); /* End position */
-    }
+    0% { transform: translateX(0%); } /* Start off-screen to the left */
+    100% { transform: translateX(100%); } /* End off-screen to the right */
 }
 
+
+
+
+.image {
+    display: block;
+    max-width: 100%;
+    height: 350px;
+    width: 100%;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align:center;
+    color: white;
+}
+
+.text-overlay h2 {
+margin-top: 130px;
+    font-size: 40px;
+  
+    text-align:center; 
+}
+
+.text-overlay p {
+    padding-bottom: 200px;
+    margin-bottom: 150px;
+    font-size: 20px;
+  
+   
+}
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: black;
+    color:black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tooltip:hover::before {
+    opacity: 1;
+}
