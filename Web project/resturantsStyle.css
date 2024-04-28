@@ -109,74 +109,77 @@ label {
 }
 
 .moving-text-container {
-    white-space: nowrap; /* Prevent text from wrapping */
-    
+    width: 100%; /* Full width of the viewport */
+    overflow: hidden; /* Hide anything going out of the box */
+    white-space: nowrap; /* Keep all text in a single line */
+ 
 }
 
 .moving-text {
-    font-size: 25px;
-    display: inline-block; /* Make text move next to each other */
-    margin-right: 40px; /* Adjust spacing between texts */
-    animation: moveText 10s linear infinite; /* Apply animation to move text */
+    display: inline-block;
+    font-size: 24px; /* Larger font size */
+    animation: moveText 15s linear infinite; /* Smooth continuous motion */
 }
 
 @keyframes moveText {
-    0% { transform: translateX(0%); } /* Start off-screen to the left */
-    100% { transform: translateX(100%); } /* End off-screen to the right */
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%); /* Only move half the total width to start repeating halfway through */
+    }
 }
 
 
 
+.image-gallery {
+    position: relative;
+    width: 100%; /* Ensures the gallery takes up the full width */
+    max-width: 100%; /* No maximum width limit */
+    margin: auto; /* Center the gallery if needed */
+    overflow: hidden; /* Ensures nothing spills outside the container */
+}
 
-.image {
-    display: block;
-    max-width: 100%;
-    height: 350px;
-    width: 100%;
+.slide {
+    display: none;
+    position: relative;
+    width: 100%; /* Full width of the container */
+    height: auto; /* Height is auto, but you can adjust this as needed */
+}
+
+.slide img {
+    width: 100%; /* Makes image full width */
+    height: auto; /* Keeps image proportional */
+    object-fit: cover; /* Ensures the image covers the designated area */
+    max-height: 350px; /* Adjust max height as needed to control slideshow height */
 }
 
 .text-overlay {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align:center;
+    bottom: 10px;
+    left: 10px;
     color: white;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background for readability */
+    padding: 20px;
+    width: 100%;
+    text-align: center; /* Centers the text */
 }
 
-.text-overlay h2 {
-margin-top: 130px;
-    font-size: 40px;
-  
-    text-align:center; 
+/* Fading animation */
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
 }
 
-.text-overlay p {
-    padding-bottom: 200px;
-    margin-bottom: 150px;
-    font-size: 20px;
-  
-   
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
 }
 
-.tooltip {
-    position: relative;
+
+/* Set an infinite slideshow */
+.image-gallery .slide:target {
+    display: block;
+    animation: fade 1.5s;
 }
 
-.tooltip::before {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: black;
-    color:black;
-    padding: 5px 10px;
-    border-radius: 5px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.tooltip:hover::before {
-    opacity: 1;
-}

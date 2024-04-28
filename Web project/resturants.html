@@ -9,27 +9,61 @@
 
 
     <div class="image-gallery">
-    
-      
-            <img src="https://static.vecteezy.com/system/resources/thumbnails/022/576/369/small/image-of-wooden-table-in-front-of-abstract-blurred-background-of-resturant-lights-wood-table-top-on-blur-of-lighting-in-night-cafe-restaurant-background-selective-focus-generative-ai-photo.jpg" alt="Your Image" class="image" ;">
+        <div class="slide fade">
+            <img src="https://sizzleregypt.com/qiqijag/2021/01/maadibanner.png" alt="Image 1">
             <div class="text-overlay">
                 <h2>Reserve Your Table Today!</h2>
-                <p>There Is No Sincerer love Than The Love Of Food</p>
-               <!--<p>Join us for a memorable dining experience. Book your spot now!</p>-->
+                <p>There is no sincerer love than the love of food.</p>
             </div>
-    
-       
+        </div>
+        <div class="slide fade">
+            <img src="https://theinsideruae.files.wordpress.com/2015/09/rhubarb-at-sky-garden-sized92.jpg" alt="Image 2">
+            <div class="text-overlay">
+                <h2>Discover New Tastes!</h2>
+                <p>Explore unique flavors from around the world.</p>
+            </div>
+        </div>
+        <div class="slide fade">
+            <img src="https://top10cairo.com/wp-content/uploads/2023/10/The-Best-Restaurants-in-Cairo.jpg" alt="Image 3">
+            <div class="text-overlay">
+                <h2>Experience Culinary Excellence</h2>
+                <p>Our chefs create magic on a plate every day.</p>
+            </div>
+        </div>
+        <div class="slide fade">
+            <img src="https://t3.ftcdn.net/jpg/06/37/16/64/360_F_637166455_RZOHg6K3M6noLPKQmOHH5ZI70zXEyDaq.jpg" alt="Image 4">
+            <div class="text-overlay">
+                <h2>A Night to Remember</h2>
+                <p>Perfect settings for your special occasions.</p>
+            </div>
+        </div>
     </div>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+        
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 4000); // Change image every 4 seconds
+        }
+        </script>
+            
     
 
     <div class="moving-text-container">
-        <p class="moving-text"> Explore our extensive selection of restaurants </p>
-        <p class="moving-text"> Explore our extensive selection of restaurants </p>
-        <p class="moving-text"> Explore our extensive selection of restaurants </p>
-        <p class="moving-text"> Explore our extensive selection of restaurants </p>
-        <p class="moving-text"> Explore our extensive selection of restaurants </p>
-
+        <p class="moving-text">
+            &emsp;&emsp;&ensp;Explore our extensive selection of restaurants &emsp;&emsp; Explore our extensive selection of restaurants &emsp;&emsp; Explore our extensive selection of restaurants &emsp;&emsp; Explore our extensive selection of restaurants
+        </p>
+        
     </div>
+    
+    
 
 
     <div class="container">
