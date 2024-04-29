@@ -1,0 +1,85 @@
+/* Resetting default browser styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+header {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.reservation-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.reservation-card:hover {
+    transform: translateY(-5px);
+}
+
+.reservation-details {
+    padding: 20px;
+}
+
+.reservation-details h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.reservation-details p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.reservation-details .info-label {
+    font-weight: bold;
+}
+
+.reservation-details .info-value {
+    margin-left: 5px;
+}
+
+.reservation-details .btn-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.reservation-details .btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reservation-details .btn:hover {
+    background-color: #0056b3;
+}
