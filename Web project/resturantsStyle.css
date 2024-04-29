@@ -1,0 +1,185 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; /* Add bottom margin */
+    position: relative;
+    display: inline-block;
+}
+
+
+#category {
+    margin-top: 40px;
+    padding: 8px;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 15px;
+    flex-grow: 1; 
+   width: 350px;
+}
+
+#category:focus {
+    outline: none; /* Remove the default focus outline */
+    border-color: #007bff; /* Change border color when focused */
+}
+
+#checkbox {
+
+margin-top: 25px;
+
+}
+#submit{
+    margin-left: 15px;
+   width: 100px;
+   padding: 3px;
+   font-size: 17px;
+   border-radius: 10px;
+}
+
+form {
+    margin-right: 10px; /* Add margin between the form and the next element */
+  
+}
+
+label {
+    margin-right: 5px; /* Add margin between the label and the checkbox */
+    font-size: 25px;
+}
+
+
+
+.restaurants {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+.restaurant {
+    background: white;
+    border: 1px solid black;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+.restaurant u {
+    color: #333;
+  font-size: 25px;
+    
+}
+.restaurant span {
+    font-size: 50px;
+  
+}
+.restaurant:hover{
+    transform: translateY(-10px); /* Moves the card up by 10 pixels /
+    cursor: pointer; / Changes the cursor to indicate it's clickable */
+}
+
+
+
+.restaurant-img img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+.restaurant-info {
+    margin-top: 1rem;
+}
+.restaurant-cat {
+    color: #333;
+}
+.restaurant-info a {
+    color: #06c;
+    text-decoration: none;
+}
+@media(max-width: 700px) {
+    .content {
+        flex-direction: column;
+    }
+    .card {
+        width: 90%;
+        margin: 20px auto;
+    }
+}
+.top-image {
+    width: 100%; /* Adjust as needed */
+    max-height: 250px; /* Set maximum height */
+    margin-bottom: 20px; /* Add bottom margin */
+}
+
+.moving-text-container {
+    width: 100%; /* Full width of the viewport */
+    overflow: hidden; /* Hide anything going out of the box */
+    white-space: nowrap; /* Keep all text in a single line */
+ 
+}
+
+.moving-text {
+    display: inline-block;
+    font-size: 24px; /* Larger font size */
+    animation: moveText 15s linear infinite; /* Smooth continuous motion */
+}
+
+@keyframes moveText {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%); /* Only move half the total width to start repeating halfway through */
+    }
+}
+
+
+
+.image-gallery {
+    position: relative;
+    width: 100%; /* Ensures the gallery takes up the full width */
+    max-width: 100%; /* No maximum width limit */
+    margin: auto; /* Center the gallery if needed */
+    overflow: hidden; /* Ensures nothing spills outside the container */
+}
+
+.slide {
+    display: none;
+    position: relative;
+    width: 100%; /* Full width of the container */
+    height: auto; /* Height is auto, but you can adjust this as needed */
+}
+
+.slide img {
+    width: 100%; /* Makes image full width */
+    height: auto; /* Keeps image proportional */
+    object-fit: cover; /* Ensures the image covers the designated area */
+    max-height: 350px; /* Adjust max height as needed to control slideshow height */
+}
+
+.text-overlay {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background for readability */
+    padding: 20px;
+    width: 100%;
+    text-align: center; /* Centers the text */
+}
+
+/* Fading animation */
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+
+/* Set an infinite slideshow */
+.image-gallery .slide:target {
+    display: block;
+    animation: fade 1.5s;
+}
+
