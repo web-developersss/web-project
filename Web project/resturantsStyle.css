@@ -1,14 +1,27 @@
-body{
-background-color: #E0E0E0;
-}
-.container {
+
+
+body, html {
+    background-color: #E0E0E0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+  
+  .container {
+    width: 100%; /* Make sure outer containers are also full width */
+    padding: 0;
+    margin: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px; /* Add bottom margin */
     position: relative;
     display: inline-block;
-}
+  }
+  
+   
+
 
 
 #category {
@@ -139,11 +152,9 @@ label {
 
 .image-gallery {
     position: relative;
-    width: 100%; /* Ensures the gallery takes up the full width */
-    max-width: 100%; /* No maximum width limit */
-    margin: auto; /* Center the gallery if needed */
-    overflow: hidden; /* Ensures nothing spills outside the container */
-}
+    width: 100%;
+    overflow: hidden;
+  }
 
 .slide {
     display: none;
@@ -188,3 +199,11 @@ label {
     animation: fade 1.5s;
 }
 
+.iframe-styling {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    z-index: 998; /* Lower than the openbtn */
+    text-align: right; /* Align the text to the right */
+border: none;
+}
