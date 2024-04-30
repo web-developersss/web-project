@@ -1,12 +1,31 @@
-.container {
+
+
+body, html {
+    background-color: #E0E0E0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+  
+  .container {
+    width: 100%; /* Make sure outer containers are also full width */
+    padding: 0;
+    margin: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px; /* Add bottom margin */
-}
+    position: relative;
+    display: inline-block;
+  }
+  
+   
+
 
 
 #category {
+    margin-top: 40px;
     padding: 8px;
     font-size: 20px;
     border: 1px solid black;
@@ -30,7 +49,7 @@ margin-top: 25px;
    width: 100px;
    padding: 3px;
    font-size: 17px;
-   
+   border-radius: 10px;
 }
 
 form {
@@ -52,7 +71,7 @@ label {
     padding: 20px;
 }
 .restaurant {
-    background: white;
+    background:white;
     border: 1px solid black;
     padding: 20px;
     text-align: center;
@@ -60,9 +79,10 @@ label {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     transition: transform 0.3s;
 }
-.restaurant h3 {
+.restaurant u {
     color: #333;
-    font-family: 'Times New Roman' ;
+  font-size: 25px;
+    
 }
 .restaurant span {
     font-size: 50px;
@@ -93,6 +113,7 @@ label {
     .content {
         flex-direction: column;
     }
+    
     .card {
         width: 90%;
         margin: 20px auto;
@@ -104,46 +125,85 @@ label {
     margin-bottom: 20px; /* Add bottom margin */
 }
 
-
-
 .moving-text-container {
-    position: relative;
-    width: 100%;
-    height: 100px; /* Set height as needed */
-    overflow: hidden; /* Hide overflowing text */
+    width: 100%; /* Full width of the viewport */
+    overflow: hidden; /* Hide anything going out of the box */
+    white-space: nowrap; /* Keep all text in a single line */
+ 
 }
 
 .moving-text {
-    position: absolute;
-    animation: moveText 10s linear infinite;
-    font-size: 30px;
-    white-space: nowrap;
-    margin-right: 20px; 
+    display: inline-block;
+    font-size: 24px; /* Larger font size */
+    animation: moveText 15s linear infinite; /* Smooth continuous motion */
+
 }
 
 @keyframes moveText {
-    0% {
-        transform: translateX(0); /* Start position */
+    from {
+        transform: translateX(0);
     }
-    100% {
-        transform: translateX(90vw); /* End position */
+    to {
+        transform: translateX(-50%); /* Only move half the total width to start repeating halfway through */
     }
 }
 
-.navbar {
+
+
+.image-gallery {
+    position: relative;
+    width: 100%;
     overflow: hidden;
-    background-color: rgba(51, 51, 51, 0.5); /* Semi-transparent background */
+  }
+
+.slide {
+    display: none;
+    position: relative;
+    width: 100%; /* Full width of the container */
+    height: auto; /* Height is auto, but you can adjust this as needed */
+}
+
+.slide img {
+    width: 100%; /* Makes image full width */
+    height: auto; /* Keeps image proportional */
+    object-fit: cover; /* Ensures the image covers the designated area */
+    max-height: 350px; /* Adjust max height as needed to control slideshow height */
+}
+
+.text-overlay {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background for readability */
+    padding: 20px;
+    width: 100%;
+    text-align: center; /* Centers the text */
+}
+
+/* Fading animation */
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+
+/* Set an infinite slideshow */
+.image-gallery .slide:target {
+    display: block;
+    animation: fade 1.5s;
+}
+
+.iframe-styling {
+    overflow: hidden;
     position: fixed;
-    top: 0;
     width: 100%;
     z-index: 998; /* Lower than the openbtn */
     text-align: right; /* Align the text to the right */
-}
-
-.navbar a {
-    display: inline-block; /* Inline block for alignment */
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
+border: none;
 }

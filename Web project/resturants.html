@@ -4,33 +4,68 @@
 <head>
     <title>Restaurants</title>
     <link rel="stylesheet" href="resturantsStyle.css">
+    <link rel="icon" href="https://cdn5.f-cdn.com/contestentries/70431/10651466/53406793a0826_thumb900.jpg" type="image/x-icon"/>
+
 </head>
 <body>
-    <div class="navbar">
-
-        <a href="customerssignup.html" id="signinLink">Sign In</a> 
-        <a href="contact.html">Contact</a>
-        <a href="#resturants">Restaurants</a>
-        <a href="home.html">Home</a>
-      
-        
-    </div>
+    <iframe src="navbar.html" class="iframe-styling"></iframe>
 
     <div class="image-gallery">
-       
-            <img src="https://t4.ftcdn.net/jpg/02/94/26/33/360_F_294263329_1IgvqNgDbhmQNgDxkhlW433uOFuIDar4.jpg" alt="Image 1" style="width: 100%;" >
-      
-    
-    
-       
+        <div class="slide fade">
+            <img src="https://sizzleregypt.com/qiqijag/2021/01/maadibanner.png" alt="Image 1">
+            <div class="text-overlay">
+                <h2>Reserve Your Table Today!</h2>
+                <p>There is no sincerer love than the love of food.</p>
+            </div>
+        </div>
+        <div class="slide fade">
+            <img src="https://theinsideruae.files.wordpress.com/2015/09/rhubarb-at-sky-garden-sized92.jpg" alt="Image 2">
+            <div class="text-overlay">
+                <h2>Discover New Tastes!</h2>
+                <p>Explore unique flavors from around the world.</p>
+            </div>
+        </div>
+        <div class="slide fade">
+            <img src="https://top10cairo.com/wp-content/uploads/2023/10/The-Best-Restaurants-in-Cairo.jpg" alt="Image 3">
+            <div class="text-overlay">
+                <h2>Experience Culinary Excellence</h2>
+                <p>Our chefs create magic on a plate every day.</p>
+            </div>
+        </div>
+        <div class="slide fade">
+            <img src="https://t3.ftcdn.net/jpg/06/37/16/64/360_F_637166455_RZOHg6K3M6noLPKQmOHH5ZI70zXEyDaq.jpg" alt="Image 4">
+            <div class="text-overlay">
+                <h2>A Night to Remember</h2>
+                <p>Perfect settings for your special occasions.</p>
+            </div>
+        </div>
     </div>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+        
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 4000); // Change image every 4 seconds
+        }
+        </script>
+            
     
 
     <div class="moving-text-container">
-        <p class="moving-text">Explore our extensive selection of restaurants</p>
-        <p class="moving-text">Explore our extensive selection of restaurants</p>
-        <p class="moving-text">Explore our extensive selection of restaurants</p>
+        <p class="moving-text">
+            &emsp;&emsp;&ensp;Explore our extensive selection of restaurants &emsp;&emsp; Explore our extensive selection of restaurants &emsp;&emsp; Explore our extensive selection of restaurants &emsp;&emsp; Explore our extensive selection of restaurants
+        </p>
+        
     </div>
+    
+    
 
 
     <div class="container">
@@ -42,11 +77,13 @@
             <option value="category3"> After party</option>
             <option value="category4"> Breakfast </option>
             <option value="category5"> Birthday</option>
-            <input id="submit" type="submit" value="Choose">
+            <input id="submit" type="submit" value="Choose" title="Choose this category">
+            
+
 
         </select>
         <br>
-            <label for="checkbox">See Nearby Options:</label>
+            <label for="checkbox">See Nearby Options?</label>
             <input type="checkbox" id="checkbox" name="checkbox">
         </form>  
     
@@ -56,47 +93,48 @@
 
 
 
-        <section class="restaurants" id="restaurants">
-        
-            <div class="restaurant">
-                <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpMLLuBoglgimbpB1awqljPytzib2M3a6-Rk5weKqCmg&s" alt="Stereo Cafe" class="card-image"></span>
-                <h3>Stereo Cafe</h3>
-            </div>
+<section class="restaurants" id="restaurants">
+    <a href="details.html?id=stereo-cafe" class="restaurant" id="stereo-cafe">
+        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpMLLuBoglgimbpB1awqljPytzib2M3a6-Rk5weKqCmg&s" alt="Stereo Cafe" class="card-image"></span>
+        <br>
+        <u>Stereo Cafe</u>
+    </a>
+
+    <a href="details.html?id=pepenero-restaurant" class="restaurant" id="pepenero-restaurant">
+        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTMDxZTb6vxECNzyg-4aGecdioCQXaQ2dat5GZkQ4LJA&s" alt="Pepenero Restaurant" class="card-image"></span>
+        <br>
+        <u>Pepenero Restaurant</u>
+    </a>
+
+    <a href="details.html?id=sizzler-restaurant" class="restaurant" id="sizzler-restaurant">
+        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF7LpzjWvqnc4lKarJ83F4SJdsGVcf6G93AsSdaxpEtw&s" alt="Sizzler Restaurant" class="card-image"></span>
+        <br>
+        <u>Sizzler</u>
+    </a>
+
+    <a href="details.html?id=la-casetta" class="restaurant" id="la-casetta">
+        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkLnNOVnAbblP-gdZvqbRyhAiRZmUey52mZ7uW9hm0-g&s" alt="La Casetta" class="card-image"></span>
+        <br>
+        <u>La Casetta</u>
+    </a>
+
+    <a href="details.html?id=skas" class="restaurant" id="skas">
+        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDsN8pdznL1pSxp6XFxrEU3GOfhXbqM94H17pbtLHzkg&s" alt="Skas" class="card-image"></span>
+        <br>
+        <u>Skas</u>
+    </a>
+
+    <a href="details.html?id=the-lemon-tree-and-co" class="restaurant" id="the-lemon-tree-and-co">
+        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJcxroGQztFL3FKzUHNZza9zxKBqde-WkofScKUs9-VFnUd43sckOTFSMQ__xelCViugk&usqp=CAU" alt="The Lemon Tree And Co" class="card-image"></span>
+        <br>
+        <u>The Lemon Tree And Co</u>
+    </a>
+</section>
 
 
-            <div class="restaurant">
-                <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTMDxZTb6vxECNzyg-4aGecdioCQXaQ2dat5GZkQ4LJA&s" alt="pepenero Restaurant" class="card-image"></span>
-                <h3>Pepenero Restaurant</h3>
-            </div>
 
-
-            <div class="restaurant">
-                <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF7LpzjWvqnc4lKarJ83F4SJdsGVcf6G93AsSdaxpEtw&s" alt="Sizzler Restaurant" class="card-image"></span>
-                <h3>Sizzler</h3>
-            </div>
-
-
-            <div class="restaurant">
-                <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkLnNOVnAbblP-gdZvqbRyhAiRZmUey52mZ7uW9hm0-g&s" alt="La Casetta" class="card-image"></span>
-                <h3>La Casetta</h3>
-            </div>
-           
-
-            <div class="restaurant">
-                <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDsN8pdznL1pSxp6XFxrEU3GOfhXbqM94H17pbtLHzkg&s" alt="Skas" class="card-image"></span>
-                <h3>Skas</h3>
-            </div>
-           
-
-            <div class="restaurant">
-                <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJcxroGQztFL3FKzUHNZza9zxKBqde-WkofScKUs9-VFnUd43sckOTFSMQ__xelCViugk&usqp=CAU" alt="The Lemon Tree And Co" class="card-image"></span>
-                <h3>The Lemon Tree And Co</h3>
-            </div>
-        </section>
-        
-
-       
     
+</body>
 
 
        
