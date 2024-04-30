@@ -6,6 +6,7 @@ body, html {
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Optional: Keeps the background fixed during scrolling */
+    
 }
 
 .contact-container {
@@ -42,4 +43,12 @@ body, html {
 
 .contact a:hover {
     color: #0056b3;
+}
+.iframe-styling {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    z-index: 998; /* Lower than the openbtn */
+    text-align: right; /* Align the text to the right */
+border: none;
 }
