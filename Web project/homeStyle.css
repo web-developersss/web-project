@@ -29,6 +29,20 @@ body, html {
     width: 100%;
     left: 0;
     z-index: 1; /* Behind the content */
+   
+}
+
+
+/* Keyframe Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+      
+    }
+    to {
+        opacity: 1;
+       
+    }
 }
 
 /* Overlay Text */
@@ -36,21 +50,28 @@ body, html {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) translateY(-20px);
     z-index: 999; /* Ensure it's on top */
     width: 40%;
     padding: 20px;
     text-align: center;
-    background-color: rgba(0,0,0, 0.4); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     color: white;
     font-weight: bold;
     border: 3px solid #f1f1f1;
+    animation: fadeIn 1.5s ease-out;
 }
+
+
+
+
+
+
 
 /* Navbar Styles */
 .navbar {
     overflow: hidden;
-    background-color: rgba(51, 51, 51, 0); /* Semi-transparent background */
+    background-color: rgba(51, 51, 51, 0.5); /* Semi-transparent background */
     position: fixed;
     top: 0;
     width: 100%;
@@ -140,7 +161,7 @@ button {
     padding: 0.5em 1em;
     outline: none;
     border: none;
-    background-color: black;
+    background-color: rgb(104, 100, 100);
   }
   
   button::before {
@@ -151,7 +172,7 @@ button {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color:gray;
+    background-color:black;
     transform-origin: center bottom;
     transform: scaleY(0);
     transition: transform 0.25s ease-in-out;
@@ -165,6 +186,7 @@ button {
     transform-origin: center top;
     transform: scaleY(1);
   }
+
   .iframe-styling {
     overflow: hidden;
     position: fixed;
@@ -173,3 +195,4 @@ button {
     text-align: right; /* Align the text to the right */
 border: none;
 }
+

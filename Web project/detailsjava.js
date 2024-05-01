@@ -92,3 +92,75 @@ document.addEventListener('DOMContentLoaded', function() {
         closePhoneMessageBtn.addEventListener('click', closePhoneMessage);
     }
 });
+
+
+
+
+
+
+
+
+
+
+//modes for sign in
+document.addEventListener('DOMContentLoaded', function() {
+    // Assuming 'mode' and 'username' are stored in local storage
+    var mode = localStorage.getItem('mode'); // 0 for signed out, 1 for signed in
+    var username = localStorage.getItem('username'); // Username stored after signing in
+
+    if (mode === '1' && username) {
+        // Change the navbar to show the username instead of "Sign In"
+        var signinLink = document.getElementById('signinLink');
+        signinLink.textContent =  username+ ' \uD83D\uDC68'; // Change the text to username
+        signinLink.href = 'profile.html'; // Optionally change the href if it should link to a profile or log out page
+    }
+});
+
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    // Example: Validate user credentials and set mode and username
+    // This part should realistically make a server request
+
+    // If credentials are valid:
+    localStorage.setItem('mode', '1');
+    localStorage.setItem('username', email); // Assuming the email is the username for simplicity
+
+    // Redirect to home page or reload the page
+    history.back();
+});
+
+
+document.getElementById('reservation-button').addEventListener('click', function() {
+    var mode = localStorage.getItem('mode'); // Get mode from local storage
+    var loginPrompt = document.getElementById('login-prompt');
+    var reservationForm = document.getElementById('reservation-form');
+    var modalCover = document.createElement('div');
+    modalCover.className = 'modal-cover';
+
+    document.body.appendChild(modalCover); // Add cover to the body
+
+    if(mode === '1') {
+        // User is signed in
+        reservationForm.style.display = 'block';
+        modalCover.style.display = 'block';
+    } else {
+        // User is not signed in
+        loginPrompt.style.display = 'block';
+        modalCover.style.display = 'block';
+    }
+
+    // Close modals on background click
+    modalCover.addEventListener('click', function() {
+        reservationForm.style.display = 'none';
+        loginPrompt.style.display = 'none';
+        modalCover.style.display = 'none';
+        document.body.removeChild(modalCover);
+    });
+});
+
+
