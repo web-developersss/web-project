@@ -122,6 +122,14 @@ document.querySelector('form').addEventListener('submit', function(event) {
 
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
+    if (email === 'admin@123' && password === '123') {
+        // Set mode and username in local storage
+        localStorage.setItem('mode', '1');
+        localStorage.setItem('username', email); // Assuming the email is the username for simplicity
+
+        // Redirect to admin.html
+        window.location.href = 'admin.html';
+    } else {
 
     // Example: Validate user credentials and set mode and username
     // This part should realistically make a server request
@@ -132,6 +140,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
 
     // Redirect to home page or reload the page
     history.back();
+    }
 });
 
 
@@ -162,5 +171,8 @@ document.getElementById('reservation-button').addEventListener('click', function
         document.body.removeChild(modalCover);
     });
 });
+
+
+
 
 
