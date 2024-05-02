@@ -19,8 +19,8 @@
                 <p>Date: 2024-05-01</p>
                 <p>Time: 6:00pm</p>
                 <p>Guests: 4</p>
-                <button onclick="makeReservation()">Make Reservation Again</button>
-                <button onclick="openFeedbackModal()">Tell us your opinion</button>
+                <button onclick="makeReservation(1)">Make Reservation Again</button>
+                <button onclick="openFeedbackModal(1)">Tell us your opinion</button>
             </div>
         </div>
         <div class="reservation-card">
@@ -30,36 +30,65 @@
                 <p>Date: 2024-08-18</p>
                 <p>Time: 9:00pm</p>
                 <p>Guests: 2</p>
-                <button onclick="makeReservation()">Make Reservation Again</button>
-                <button onclick="openFeedbackModal()">Tell us your opinion</button>
+                <button onclick="makeReservation(2)">Make Reservation Again</button>
+                <button onclick="openFeedbackModal(2)">Tell us your opinion</button>
             </div>
         </div>
     </div>
 
     <!-- Modal -->
-    <div id="feedbackModal" class="modal">
+    <div id="feedbackModal1" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeFeedbackModal()">&times;</span>
+            <span class="close" onclick="closeFeedbackModal(1)">&times;</span>
             <h2>Give Feedback</h2>
-            <form id="feedbackForm">
+            <form id="feedbackForm1">
                <span></span>
                <div class="rate">
-                <input type="radio" id="star5" name="rate" value="5" />
-                <label for="star5" title="text">5 stars</label>
-                <input type="radio" id="star4" name="rate" value="4" />
-                <label for="star4" title="text">4 stars</label>
-                <input type="radio" id="star3" name="rate" value="3" />
-                <label for="star3" title="text">3 stars</label>
-                <input type="radio" id="star2" name="rate" value="2" />
-                <label for="star2" title="text">2 stars</label>
-                <input type="radio" id="star1" name="rate" value="1" />
-                <label for="star1" title="text">1 star</label>
+                <input type="radio" id="star5_1" name="rate_1" value="5" />
+                <label for="star5_1" title="text">5 stars</label>
+                <input type="radio" id="star4_1" name="rate_1" value="4" />
+                <label for="star4_1" title="text">4 stars</label>
+                <input type="radio" id="star3_1" name="rate_1" value="3" />
+                <label for="star3_1" title="text">3 stars</label>
+                <input type="radio" id="star2_1" name="rate_1" value="2" />
+                <label for="star2_1" title="text">2 stars</label>
+                <input type="radio" id="star1_1" name="rate_1" value="1" />
+                <label for="star1_1" title="text">1 star</label>
             </div>
             
-                  <label for="rating">Rating (out of 5):</label>
+                  <label for="rating_1">Rating (out of 5):</label>
                 <br>
-                <label for="review">Review:</label>
-                <textarea id="review" name="review" rows="4" cols="50" required></textarea>
+                <label for="review_1">Review:</label>
+                <textarea id="review_1" name="review_1" rows="4" cols="50" required></textarea>
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="feedbackModal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeFeedbackModal(2)">&times;</span>
+            <h2>Give Feedback</h2>
+            <form id="feedbackForm2">
+               <span></span>
+               <div class="rate">
+                <input type="radio" id="star5_2" name="rate_2" value="5" />
+                <label for="star5_2" title="text">5 stars</label>
+                <input type="radio" id="star4_2" name="rate_2" value="4" />
+                <label for="star4_2" title="text">4 stars</label>
+                <input type="radio" id="star3_2" name="rate_2" value="3" />
+                <label for="star3_2" title="text">3 stars</label>
+                <input type="radio" id="star2_2" name="rate_2" value="2" />
+                <label for="star2_2" title="text">2 stars</label>
+                <input type="radio" id="star1_2" name="rate_2" value="1" />
+                <label for="star1_2" title="text">1 star</label>
+            </div>
+            
+                  <label for="rating_2">Rating (out of 5):</label>
+                <br>
+                <label for="review_2">Review:</label>
+                <textarea id="review_2" name="review_2" rows="4" cols="50" required></textarea>
                 <br>
                 <button type="submit">Submit</button>
             </form>
@@ -67,28 +96,37 @@
     </div>
 
     <script>
-        function makeReservation() {
+        function makeReservation(reservationId) {
             // Your logic for making a new reservation goes here
             alert("Reservation functionality will be implemented here.");
         }
 
-        function openFeedbackModal() {
-    document.getElementById('feedbackModal').style.display = 'block';
-    document.querySelector('.modal-content').classList.add('show');
-}
+        function openFeedbackModal(reservationId) {
+            document.getElementById('feedbackModal' + reservationId).style.display = 'block';
+        }
 
-        function closeFeedbackModal() {
-            document.getElementById('feedbackModal').style.display = 'none';
+        function closeFeedbackModal(reservationId) {
+            document.getElementById('feedbackModal' + reservationId).style.display = 'none';
         }
 
         // Handle form submission
-        document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+        document.getElementById('feedbackForm1').addEventListener('submit', function(event) {
             event.preventDefault();
-            var rating = document.querySelector('input[name="rate"]:checked').value
-            var review = document.getElementById('review').value;
+            var rating = document.querySelector('input[name="rate_1"]:checked').value
+            var review = document.getElementById('review_1').value;
             if (review&&rating) {
                 alert("Thanks for your feedback!\nRating: " + rating + "\nReview: " + review);
-                closeFeedbackModal();
+                closeFeedbackModal(1);
+            }
+        });
+
+        document.getElementById('feedbackForm2').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var rating = document.querySelector('input[name="rate_2"]:checked').value
+            var review = document.getElementById('review_2').value;
+            if (review&&rating) {
+                alert("Thanks for your feedback!\nRating: " + rating + "\nReview: " + review);
+                closeFeedbackModal(2);
             }
         });
     </script>
