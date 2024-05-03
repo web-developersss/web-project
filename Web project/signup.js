@@ -12,10 +12,9 @@ if (savedUsers) {
 
 document.querySelector('form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
-
-    var name = document.getElementById('name').value;
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
+    var name = document.getElementById('name').value.toLowerCase();
+    var email = document.getElementById('email').value.toLowerCase();
+    var password = document.getElementById('password').value.toLowerCase();    
     var phone = document.getElementById('phone').value;
     var location = document.getElementById('location').value;
 
@@ -38,7 +37,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
     console.log(users);
 
     // Reset the form
-    document.querySelector('form').reset();
+    window.location.href = 'home.html';
     
 });
 
