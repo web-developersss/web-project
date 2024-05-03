@@ -102,19 +102,6 @@ input[type="submit"] {
   }
 
 
-
-a {
-    color: black;
-    font-size: 20px;
-    margin-bottom: 20px;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-a:hover {
-    color: #333;
-}
-
 .password-container {
     position: relative;
 }
@@ -133,4 +120,22 @@ a:hover {
     -webkit-text-security: none;
     -moz-text-security: none;
     text-security: none;
+}
+
+
+h6{
+    color: black;
+    font-size: 13px;
+    text-align: right;
+    margin-right: auto;
+}
+a {
+    font-size: 13px;
+    margin-bottom: 20px;
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Add transition */
+}
+
+a[href="#"] {
+    color: blue; /* Set color to blue for the specified link */
 }

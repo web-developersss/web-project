@@ -142,6 +142,26 @@
     </a>
 </section>
 
+<!-- Assume this script is part of your restaurant listing page -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
+        const restaurantsContainer = document.getElementById('restaurants');
+    
+        acceptedRestaurants.forEach(restaurant => {
+            const restaurantAnchor = document.createElement('a');
+            restaurantAnchor.href = `details.html?id=${restaurant.id}`;
+            restaurantAnchor.className = 'restaurant';
+            restaurantAnchor.id = restaurant.id;
+            restaurantAnchor.innerHTML = `
+                <span><img src="${restaurant.logoUrl}" alt="${restaurant.name}" class="card-image"></span>
+                <br>
+                <u>${restaurant.name}</u>
+            `;
+            restaurantsContainer.appendChild(restaurantAnchor);
+        });
+    });
+    </script>
 
 <script> 
     document.addEventListener('DOMContentLoaded', function() {
