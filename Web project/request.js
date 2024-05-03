@@ -62,11 +62,30 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function acceptRequest(index) {
-    // Accept request logic
-    console.log('Accepted Request:', index);
+    let requests = JSON.parse(localStorage.getItem('requestFormData')) || [];
+    let accepted = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
+    
+    // Assuming request at 'index' is the one to accept
+    const acceptedRequest = requests.splice(index, 1)[0];
+    accepted.push({
+        id: acceptedRequest.email.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase(), // creating a simple id from email
+        name: acceptedRequest.name,
+        logoUrl: acceptedRequest.logoUrl
+    });
+
+    // Update localStorage
+    localStorage.setItem('requestFormData', JSON.stringify(requests));
+    localStorage.setItem('acceptedRestaurants', JSON.stringify(accepted));
+
+    // Optionally reload or update the page content
+    location.reload();
 }
+
+
+
 
 function declineRequest(index) {
     // Decline request logic
     console.log('Declined Request:', index);
 }
+
