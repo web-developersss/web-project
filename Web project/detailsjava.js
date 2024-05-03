@@ -123,15 +123,32 @@ document.querySelector('form').addEventListener('submit', function(event) {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
 
-    // Example: Validate user credentials and set mode and username
-    // This part should realistically make a server request
+    // Check if the user is admin
+    if (email === 'admin@123' && password === '123') {
+        // Set mode and username in local storage
+        localStorage.setItem('mode', '1');
+        localStorage.setItem('username', email); // Assuming the email is the username for simplicity
 
-    // If credentials are valid:
-    localStorage.setItem('mode', '1');
-    localStorage.setItem('username', email); // Assuming the email is the username for simplicity
+        // Redirect to admin.html
+        window.location.href = 'admin.html';
+    } else {
+        // Check if the user exists in the savedUsers array
+        var savedUsers = JSON.parse(localStorage.getItem('users')) || [];
+        var userExists = savedUsers.some(function(user) {
+            return user.email === email && user.password === password;
+        });
 
-    // Redirect to home page or reload the page
-    history.back();
+        if (userExists) {
+            // Set mode and username in local storage
+            localStorage.setItem('mode', '1');
+            localStorage.setItem('username', email); // Assuming the email is the username for simplicity
+
+            // Redirect to home page or reload the page
+            history.back();
+                } else {
+            alert('Invalid email or password. Please try again.');
+        }
+    }
 });
 
 
@@ -162,5 +179,8 @@ document.getElementById('reservation-button').addEventListener('click', function
         document.body.removeChild(modalCover);
     });
 });
+
+
+
 
 
