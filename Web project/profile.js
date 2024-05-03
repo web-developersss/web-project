@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     logoutButton.addEventListener('click', function(event) {
         localStorage.setItem('mode', '0'); // Reset user mode
         localStorage.removeItem('username'); // Clear username
-        window.location.href = 'Home.html'; // Redirect to home page or login page
+        history.back();
+
     });
 });
