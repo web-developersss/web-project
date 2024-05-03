@@ -7,11 +7,27 @@
     <link rel="stylesheet" href="profile.css">
 </head>
 <body>
-    
-
     <div class="container">
         <h1>User Profile</h1>
-        <p id="userInfo">Loading...</p>
+    
+        <form id="userInfoForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" readonly>
+            </div>
+
+        
+        </form>
         <button id="logoutButton">Logout</button>
     </div>
 
