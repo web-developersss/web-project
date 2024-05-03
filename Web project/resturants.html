@@ -78,7 +78,7 @@
             <option value="category4"> Breakfast </option>
             <option value="category5"> Birthday</option>
             <input id="submit" type="submit" value="Choose" title="Choose this category">
-      
+        </form>
                 <!-- HTML for the search bar -->
                 <form id="search-form" action="/search" method="get" target="_self">
                     <input type="text" placeholder="Want to search for a restaurant?" name="q">
@@ -89,7 +89,7 @@
 
         </select>
         <!-- HTML for the search bar -->
-    </form> 
+    
 
         <br>
             <label for="checkbox">See Nearby Options?</label>
@@ -104,7 +104,7 @@
 
 
 
-<section class="restaurants" id="restaurants">
+<section class="restaurants" id="restaurantsContainer">
     <a href="details.html?id=stereo-cafe" class="restaurant" id="stereo-cafe">
         <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpMLLuBoglgimbpB1awqljPytzib2M3a6-Rk5weKqCmg&s" alt="Stereo Cafe" class="card-image"></span>
         <br>
@@ -143,7 +143,52 @@
 </section>
 
 
+<script> 
+    document.addEventListener('DOMContentLoaded', function() {
+    // This code runs after the DOM has fully loaded
 
+    // Adding event listener to the search form
+    let searchForm = document.getElementById('search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+            
+            // Get the value entered in the search input
+            let searchQueryInput = searchForm.querySelector('input[name="q"]');
+            if (searchQueryInput) {
+                let searchQuery = searchQueryInput.value.toLowerCase().trim();
+                
+                // Loop through each restaurant link
+                let restaurantLinks = document.querySelectorAll('.restaurant');
+                let found = false;
+                restaurantLinks.forEach(function(link) {
+                    let restaurantName = link.textContent.toLowerCase(); // Get the restaurant name
+                    // Check if the search query matches the restaurant name
+                    if (restaurantName.includes(searchQuery)) {
+                        let restaurantUrl = link.getAttribute('href'); // Get the URL of the matching restaurant link
+                        if (restaurantUrl) {
+                            window.location.href = restaurantUrl; // Navigate to the restaurant page
+                            found = true;
+                        }
+                        return; // Exit the loop once a match is found
+                    }
+                });
+
+                // If no matching restaurant is found, display an alert
+                if (!found) {
+                    alert("No matching restaurant found!");
+                }
+            } else {
+                console.error("Search query input element not found.");
+            }
+        });
+    } else {
+        console.error("Search form element not found.");
+    }
+});
+
+
+</script>
     
 </body>
 
