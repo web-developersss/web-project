@@ -240,3 +240,18 @@ border: none;
 .container input[type=submit]:hover {
     background-color: darkgray;
 }
+
+.restaurant {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+    color: #333;
+}
+
+.card-image {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Add more styles as necessary */
