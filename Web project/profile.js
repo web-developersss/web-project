@@ -27,13 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('userInfo').textContent = 'Not logged in.';
     }
 
-    logoutButton.addEventListener('click', function(event) {
-        localStorage.setItem('mode', '0'); // Reset user mode
-        localStorage.removeItem('username'); // Clear username
-        history.back();
-
-    });
-
+    
     editButton.addEventListener('click', function() {
         nameField.readOnly = false;
         emailField.readOnly = false;

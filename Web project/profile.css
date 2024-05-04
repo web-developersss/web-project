@@ -1,22 +1,27 @@
 body {
     background-image: url("https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?cs=srgb&dl=pexels-pixabay-260922.jpg&fm=jpg");
-    background-size: cover;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    
+    background-repeat: no-repeat;
+     background-size: cover;
 }
 
 
 .container {
     max-width: 800px;
-    margin: 20px auto;
+    margin-top: 100px;
+    margin-left: 300px;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 15px;
     background-color: #f0f0f0; 
     box-shadow: 0 0 10px rgba(0,0,0,0.1); 
     position: relative;
+    align-items: center;
+    justify-content: center;
+    border-color: goldenrod;
+    
 }
 
 h1 {
@@ -48,11 +53,12 @@ input[type="password"] {
     border-radius: 3px; /* Add a slight border radius */
 }
 
-#logoutButton {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+#editButton,
+#saveButton {
+    display: inline-block;
     padding: 5px 10px;
+    margin-right: 10px;
+    margin-top: 10px;
     background-color: #333;
     color: #fff;
     text-align: center;
@@ -61,20 +67,28 @@ input[type="password"] {
     font-size: 14px;
 }
 
+
+
+#editButton:hover,
+#saveButton:hover,
 #logoutButton:hover {
     background-color: #555;
 }
-#editButton,
-#saveButton {
-    display: inline-block;
-    padding: 5px 10px; /* Adjust padding to make the buttons smaller */
-    margin-right: 10px;
-    margin-top: 10px;
-    background-color:#ccc;
-    color: black;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 14px; /* Adjust font size */
+.iframe-styling {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    top: 0; /* Position at the top of the page */
+    left: 0;
+    z-index: 998; /* Lower than the openbtn */
+    text-align: right; /* Align the text to the right */
+    border: none;
 }
+
+
+
+
+
+
+
 
