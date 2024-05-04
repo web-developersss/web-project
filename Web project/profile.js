@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     var username = localStorage.getItem('username');
+    var userInfo = document.getElementById('userInfo');
     var userInfoForm = document.getElementById('userInfoForm');
     var nameField = document.getElementById('name');
     var emailField = document.getElementById('email');
@@ -9,30 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var saveButton = document.getElementById('saveButton');
 
     if (username) {
-        // Check if the username is that of the admin
-        if (username === "admin@123") {
-            // Handle admin specific display
-            userInfo.innerHTML = 'Logged in as Admin';
-            userInfo.innerHTML += '<br>Email: admin@123';
-            userInfo.innerHTML += '<br>Phone: N/A';
-            userInfo.innerHTML += '<br>Status: Administrator';
-        } else {
-            // Handle regular user display
-            var savedUsers = JSON.parse(localStorage.getItem('users')) || [];
-            var user = savedUsers.find(function(user) {
-                return user.email === username;
-            });
-
-            if (user) {
-                userInfo.textContent = 'Name: ' + user.name;
-                userInfo.innerHTML += '<br>Email: ' + user.email;
-                userInfo.innerHTML += '<br>Phone: ' + user.phone;
-                userInfo.innerHTML += '<br>Password: ' + user.password; // Note: displaying passwords like this is generally unsafe
-            } else {
-                userInfo.textContent = 'User not found.';
-                logoutButton.style.display = 'none'; // Hide logout button if user not found
-            }
-
         var savedUsers = JSON.parse(localStorage.getItem('users')) || [];
         var user = savedUsers.find(function(user) {
             return user.email === username;
@@ -44,14 +21,20 @@ document.addEventListener('DOMContentLoaded', function() {
             phoneField.value = user.phone;
         } else {
             userInfoForm.style.display = 'none'; // Hide form if user not found
-            document.getElementById('userInfo').textContent = 'User not found.';
+            userInfo.textContent = 'User not found.';
         }
     } else {
         userInfoForm.style.display = 'none'; // Hide form if not logged in
-        document.getElementById('userInfo').textContent = 'Not logged in.';
+        userInfo.textContent = 'Not logged in.';
     }
 
-    
+    logoutButton.addEventListener('click', function(event) {
+        localStorage.setItem('mode', '0'); // Reset user mode
+        localStorage.removeItem('username'); // Clear username
+        console.log('Logging out...'); // Log to check if the event listener is triggered
+        window.location.href = 'Home.html'; // Redirect to homepage
+    });
+
     editButton.addEventListener('click', function() {
         nameField.readOnly = false;
         emailField.readOnly = false;
