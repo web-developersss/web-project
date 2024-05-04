@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return user.email === username;
         });
 
+        
         if (user) {
             userInfo.textContent = 'Name: ' + user.name ;
             userInfo.innerHTML += '<br>Email: ' + user.email;
@@ -16,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
             userInfo.innerHTML += '<br>password: ' + user.password;
         } else {
             userInfo.textContent = 'User not found.';
-            logoutButton.style.display = 'none'; // Hide logout button if user not found
+            // Hide logout button if user not found
         }
     } else {
         userInfo.textContent = 'Not logged in.';

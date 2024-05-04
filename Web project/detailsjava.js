@@ -184,3 +184,79 @@ document.getElementById('reservation-button').addEventListener('click', function
 
 
 
+// detailsjava.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to get the query parameter by name
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    // Retrieve the id from the URL
+    const restaurantId = getQueryParam('id');
+
+    // Retrieve the list of accepted restaurants
+    const acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
+    // Find the restaurant data by id
+    const restaurant = acceptedRestaurants.find(r => r.id === restaurantId);
+
+    if (restaurant) {
+        // Set the content on the page
+        document.getElementById('restaurant-name').textContent = restaurant.name;
+        document.getElementById('restaurant-description').textContent = restaurant.description;
+        document.getElementById('restaurant-image').src = restaurant.photoUrl;
+        document.getElementById('restaurant-image').alt = `Image of ${restaurant.name}`;
+        
+        // Set links and other info
+        document.getElementById('location-icon').href = `http://maps.google.com/?q=${restaurant.location}`;
+        document.getElementById('phone-number').textContent = restaurant.phone;
+        document.getElementById('menu-icon').href = restaurant.menuUrl;
+    } else {
+        console.error('Restaurant data not found.');
+    }
+
+    // Show phone number in modal
+    document.getElementById('phone-icon').addEventListener('click', () => {
+        document.getElementById('phone-message').style.display = 'block';
+    });
+
+    // Close phone message
+    document.getElementById('close-phone-message').addEventListener('click', () => {
+        document.getElementById('phone-message').style.display = 'none';
+    });
+});
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('reservation-form');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+        
+        // Retrieve username from localStorage
+        const username = localStorage.getItem('username');
+        if (!username) {
+            alert('Please log in to make a reservation.');
+            return;
+        }
+
+        // Collect form data
+        const formData = {
+            status:'pending',
+            username: username,
+            number: document.getElementById('number').value,
+            date: document.getElementById('date').value,
+            time: document.getElementById('time').value
+        };
+
+        // Save registration data in localStorage
+        let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
+        reservations.push(formData);
+        localStorage.setItem('reservations', JSON.stringify(reservations));
+
+        
+        window.back();
+    });
+});
