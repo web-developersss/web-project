@@ -4,38 +4,58 @@ document.addEventListener('DOMContentLoaded', function() {
     var logoutButton = document.getElementById('logoutButton');
 
     if (username) {
-        // Check if the username is that of the admin
+        // First, check if the user is the admin
         if (username === "admin@123") {
-            // Handle admin specific display
             userInfo.innerHTML = 'Logged in as Admin';
             userInfo.innerHTML += '<br>Email: admin@123';
-            userInfo.innerHTML += '<br>Phone: N/A';
+            userInfo.innerHTML += '<br>Phone: 01159141115';
             userInfo.innerHTML += '<br>Status: Administrator';
         } else {
-            // Handle regular user display
+            // Check across different user roles
             var savedUsers = JSON.parse(localStorage.getItem('users')) || [];
-            var user = savedUsers.find(function(user) {
-                return user.email === username;
-            });
+            var requestFormData = JSON.parse(localStorage.getItem('requestFormData')) || [];
+            var acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
 
-            if (user) {
-                userInfo.textContent = 'Name: ' + user.name;
-                userInfo.innerHTML += '<br>Email: ' + user.email;
-                userInfo.innerHTML += '<br>Phone: ' + user.phone;
-                userInfo.innerHTML += '<br>Password: ' + user.password; // Note: displaying passwords like this is generally unsafe
+            // Check if user is in acceptedRestaurants
+            var acceptedUser = acceptedRestaurants.find(user => user.email === username);
+            if (acceptedUser) {
+                userInfo.innerHTML = `Name: ${acceptedUser.name}`;
+                userInfo.innerHTML += `<br>Email: ${acceptedUser.email}`;
+                userInfo.innerHTML += `<br>Phone: ${acceptedUser.phone}`;
+                userInfo.innerHTML += `<br>Role: Restaurant Owner`+'👨‍🍳';
+                userInfo.innerHTML += `<br>Restaurant Status: Accepted`;
+
             } else {
-                userInfo.textContent = 'User not found.';
-                logoutButton.style.display = 'none'; // Hide logout button if user not found
+                // Check if user is in requestFormData
+                var pendingUser = requestFormData.find(user => user.email === username);
+                if (pendingUser) {
+                    userInfo.innerHTML = `Name: ${pendingUser.name}`;
+                    userInfo.innerHTML += `<br>Email: ${pendingUser.email}`;
+                    userInfo.innerHTML += `<br>Phone: ${pendingUser.phone}`;
+                    userInfo.innerHTML += `<br>Role: Restaurant Owner`+'👨‍🍳';
+                    userInfo.innerHTML += `<br>Restaurant Status: Pending`;
+                } else {
+                    // Finally, check if the user is a regular user
+                    var regularUser = savedUsers.find(user => user.email === username);
+                    if (regularUser) {
+                        userInfo.innerHTML = `Name: ${regularUser.name}`;
+                        userInfo.innerHTML += `<br>Email: ${regularUser.email}`;
+                        userInfo.innerHTML += `<br>Phone: ${regularUser.phone}`;
+                        userInfo.innerHTML += `<br>Role: User`;
+                    } else {
+                        userInfo.textContent = 'User not found.';
+                    }
+                }
             }
         }
     } else {
         userInfo.textContent = 'Not logged in.';
-        logoutButton.style.display = 'none'; // Hide logout button if not logged in
+        logoutButton.style.display = 'none'; // Hide the logout button if not logged in
     }
 
     logoutButton.addEventListener('click', function(event) {
         localStorage.setItem('mode', '0'); // Reset user mode
         localStorage.removeItem('username'); // Clear username
-        window.location.href = 'Home.html'; // Redirect to login page instead of using history.back()
+        window.location.href = 'Home.html'; // Redirect to the home page
     });
 });
