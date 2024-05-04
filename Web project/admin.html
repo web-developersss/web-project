@@ -14,7 +14,32 @@
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="manage-users.html">Manage Users</a></li>
                 <li><a href="viewReservation.html">view reservation</a></li>
-                <li><a href="logout.html">Logout</a></li>
+                <li><a href="#" id="logout-link">Logout</a></li>
+
+
+
+                <script> 
+               document.addEventListener('DOMContentLoaded', function() {
+    // Select the logout link element
+    var logoutLink = document.getElementById('logout-link');
+
+    // Add event listener to the logout link
+    logoutLink.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent default link behavior
+
+        // Reset user mode
+        localStorage.setItem('mode', '0');
+        
+        // Clear username
+        localStorage.removeItem('username');
+
+         // Navigate back in history
+         history.back();
+    });
+});
+
+
+                </script>
             </ul>
         </nav>
     </header>
@@ -26,11 +51,21 @@
         </div>
         <div class="summary-item">
             <h2>Requests Pending</h2>
-            <p>45</p>
+            <p> <span id="request-count"></span></p>
+           <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Retrieve the request count from localStorage
+                    const requestCount = parseInt(localStorage.getItem('requestCount')) || 0;
+        
+                    // Display the request count on the page
+                    document.getElementById('request-count').textContent = requestCount;
+                });
+            </script> 
+
         </div>
         <div class="summary-item">
             <h2> Total Restaurants</h2>
-            <p>9</p>
+           
         </div>
     </div>
 

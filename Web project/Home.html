@@ -50,8 +50,16 @@
 <div class="bg-text">
     <h2>WELCOME!</h2>
     <p>Welcome to Night Out! Your one-stop destination for booking the best dining experiences. Discover and reserve tables at top restaurants with ease.</p>
-    <button>Reserve Now!</button>
+    <button id="reserve-button">Reserve Now!</button>
 </div>
+
+
+<script>
+  
+  document.getElementById('reserve-button').addEventListener('click', function() {
+      window.location.href = 'Resturants.html';
+  });
+</script>
 
 
 </body>
