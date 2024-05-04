@@ -27,6 +27,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Store updated array in localStorage
         localStorage.setItem('requestFormData', JSON.stringify(requests));
 
+          // Increment the request count
+          let requestCount = parseInt(localStorage.getItem('requestCount')) || 0;
+          requestCount++;
+          localStorage.setItem('requestCount', requestCount);
+
+          
         // Redirect to the page where requests are displayed
         window.location.href = 'home.html';
     });

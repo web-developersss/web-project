@@ -191,3 +191,38 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('phone-message').style.display = 'none';
     });
 });
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('reservation-form');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+        
+        // Retrieve username from localStorage
+        const username = localStorage.getItem('username');
+        if (!username) {
+            alert('Please log in to make a reservation.');
+            return;
+        }
+
+        // Collect form data
+        const formData = {
+            status:'pending',
+            username: username,
+            number: document.getElementById('number').value,
+            date: document.getElementById('date').value,
+            time: document.getElementById('time').value
+        };
+
+        // Save registration data in localStorage
+        let reservations = JSON.parse(localStorage.getItem('reservations')) || [];
+        reservations.push(formData);
+        localStorage.setItem('reservations', JSON.stringify(reservations));
+
+        
+        window.back();
+    });
+});
