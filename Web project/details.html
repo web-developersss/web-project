@@ -17,18 +17,41 @@
                 <h1 id="restaurant-name">Connect with the Faces Behind Your Food.</h1>
                 <p id="restaurant-description">Resident brings chefs from the world's top restaurants to host intimate dinners in unique, luxury spaces. Reserve your tickets below, or book a private event here.</p>
                 <button id="reservation-button">Reserve Now!</button>
+
+
+                <div id="login-prompt" style="display:none;">
+                    <p>Please sign in to make a reservation.</p>
+                    <button onclick="window.location.href='signin.html';">Sign In</button>
+                </div>
+                
+                <!-- Modal/Popup for Reservation Form -->
+                <div id="reservation-form" style="display:none;">
+                    <form>
+                        <label for="number">Number of People:</label>
+                        <input type="number" id="number" name="number" required>
+                        <label for="date">Date:</label>
+                        <input type="date" id="date" name="date" required>
+                        <label for="time">Time:</label>
+                        <input type="time" id="time" name="time" required>
+                        <button type="submit">Confirm Reservation</button>
+                    </form>
+                </div>
+
+
+
                 <div class="info-icons">
-                    <a href="http://maps.google.com/?q=RestaurantLocation" target="_blank" id="location-icon">&#x1F4CD; Location</a>
-                    <span id="phone-icon">&#x1F4DE; Phone</span>
-                    <a href="RestaurantMenuURL" target="_blank" id="menu-icon">&#x1F374; Menu</a>
+                    <a href="#" target="_blank" id="location-icon">&#x1F4CD; Location</a>
+                    <span id="phone-icon" style="cursor:pointer;">&#x1F4DE; Phone</span>
+                    <a href="#" target="_blank" id="menu-icon">&#x1F374; Menu</a>
+                    
                 </div>
                 
                 <div id="phone-message" class="phone-message-hidden">
-                    <p id="phone-number">Call us: +1 (555) 123-456</p>
+                    <p id="phone-number"></p>
                     <button id="close-phone-message">Close</button>
                 </div>
                 
-                <script src="detailsjava.js"></script>
+                                <script src="detailsjava.js"></script>
                 
             </div>
             <div class="image-section">
