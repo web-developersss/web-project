@@ -18,15 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 return user.email === username;
             });
 
-        
-        if (user) {
-            userInfo.textContent = 'Name: ' + user.name ;
-            userInfo.innerHTML += '<br>Email: ' + user.email;
-            userInfo.innerHTML += '<br>Phone: ' + user.phone;
-            userInfo.innerHTML += '<br>password: ' + user.password;
-        } else {
-            userInfo.textContent = 'User not found.';
-            // Hide logout button if user not found
+            if (user) {
+                userInfo.textContent = 'Name: ' + user.name;
+                userInfo.innerHTML += '<br>Email: ' + user.email;
+                userInfo.innerHTML += '<br>Phone: ' + user.phone;
+                userInfo.innerHTML += '<br>Password: ' + user.password; // Note: displaying passwords like this is generally unsafe
+            } else {
+                userInfo.textContent = 'User not found.';
+                logoutButton.style.display = 'none'; // Hide logout button if user not found
+            }
         }
     } else {
         userInfo.textContent = 'Not logged in.';
