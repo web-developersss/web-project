@@ -40,6 +40,7 @@
             </div>
         </div>
     </div>
+    
     <script>
         let slideIndex = 0;
         showSlides();
@@ -56,7 +57,7 @@
         }
         </script>
             
-    
+            
 
     <div class="moving-text-container">
         <p class="moving-text">
@@ -64,41 +65,42 @@
         </p>
         
     </div>
+    <div class="container"><form id="search-form" action="/search" method="get" target="_self">
+        <input type="text" placeholder="Want to search for a restaurant?" name="q">
+        <input type="submit" value="Search">
+    </form></div>
     
-    
+    <label for="checkbox">See Nearby Options?</label>
+    <input type="checkbox" id="checkbox" name="checkbox">
 
 
-    <div class="container">
-        <form action="#">
-        <select id="category" name="category" required>
-            <option value="" selected disabled>Choose a category</option>
-            <option value="category1"> Fancy outing</option>
-            <option value="category2"> Casual outing</option>
-            <option value="category3"> After party</option>
-            <option value="category4"> Breakfast </option>
-            <option value="category5"> Birthday</option>
-            <input id="submit" type="submit" value="Choose" title="Choose this category">
-        </form>
-                <!-- HTML for the search bar -->
-                <form id="search-form" action="/search" method="get" target="_self">
-                    <input type="text" placeholder="Want to search for a restaurant?" name="q">
-                    <input type="submit" value="Search">
-                </form>
-                
-            
-
-        </select>
-        <!-- HTML for the search bar -->
-    
-
-        <br>
-            <label for="checkbox">See Nearby Options?</label>
-            <input type="checkbox" id="checkbox" name="checkbox">
+    <div class="category">
        
+        <div class="category">
+            <button class="category" onclick="selectCategory('category1')">
+                <img src="https://t3.ftcdn.net/jpg/06/37/16/64/360_F_637166455_RZOHg6K3M6noLPKQmOHH5ZI70zXEyDaq.jpg" alt="Category 1">
+                Fancy outing
+            </button>
+            <button class="category" onclick="selectCategory('category2')">
+                <img src="https://images.affordableseating.net/dpr_1.0,f_auto,q_auto/afd/media/contenttype/fast_casual_restaurant.jpg" alt="Category 2">
+                Casual outing
+            </button>
+            <button class="category" onclick="selectCategory('category3')">
+                <img src="https://mindyweiss.com/wp-content/uploads/2018/05/FT4A2907-2-1024x683.jpg" alt="Category 3">
+                After party
+            </button>
+            <button class="category" onclick="selectCategory('category4')">
+                <img src="http://www.egypttoday.com/siteimages/Larg/2022051606020424.jpg" alt="Category 4">
+                Breakfast
+            </button>
+            <button class="category" onclick="selectCategory('category5')">
+                <img src="https://assets-global.website-files.com/64c20b61ae8773a0066d0afe/653643b33e0582cd877abd95_beautiful-young-woman-in-cokctail-dress-blowing-ca-2022-12-16-14-00-04-utc%20(1)-p-1080.jpg" alt="Category 5">
+                Birthday
+            </button>
+        </div>
+        
+    </div>
     
-
-
-</div>
         
         
 
