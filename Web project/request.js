@@ -27,6 +27,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Store updated array in localStorage
         localStorage.setItem('requestFormData', JSON.stringify(requests));
 
+          // Increment the request count
+          let requestCount = parseInt(localStorage.getItem('requestCount')) || 0;
+          requestCount++;
+          localStorage.setItem('requestCount', requestCount);
+
+          
         // Redirect to the page where requests are displayed
         window.location.href = 'home.html';
     });
@@ -70,8 +76,19 @@ function acceptRequest(index) {
     accepted.push({
         id: acceptedRequest.email.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase(), // creating a simple id from email
         name: acceptedRequest.name,
-        logoUrl: acceptedRequest.logoUrl
+        email: acceptedRequest.email,
+        phone: acceptedRequest.phone,
+        location: acceptedRequest.location,
+        openingTime: acceptedRequest.openingTime,
+        closingTime: acceptedRequest.closingTime,
+        description: acceptedRequest.description,
+        category: acceptedRequest.category,
+        menuUrl: acceptedRequest.menuUrl,
+        locationUrl: acceptedRequest.locationUrl,
+        logoUrl: acceptedRequest.logoUrl,
+        photoUrl: acceptedRequest.photoUrl
     });
+    
 
     // Update localStorage
     localStorage.setItem('requestFormData', JSON.stringify(requests));
