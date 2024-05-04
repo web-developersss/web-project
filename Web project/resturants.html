@@ -78,15 +78,26 @@
             <option value="category4"> Breakfast </option>
             <option value="category5"> Birthday</option>
             <input id="submit" type="submit" value="Choose" title="Choose this category">
+      
+                <!-- HTML for the search bar -->
+                <form id="search-form" action="/search" method="get" target="_self">
+                    <input type="text" placeholder="Want to search for a restaurant?" name="q">
+                    <input type="submit" value="Search">
+                </form>
+                
             
 
-
         </select>
+        <!-- HTML for the search bar -->
+    </form> 
+
         <br>
             <label for="checkbox">See Nearby Options?</label>
             <input type="checkbox" id="checkbox" name="checkbox">
-        </form>  
+       
     
+
+
 </div>
         
         
@@ -94,43 +105,29 @@
 
 
 <section class="restaurants" id="restaurants">
-    <a href="details.html?id=stereo-cafe" class="restaurant" id="stereo-cafe">
-        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpMLLuBoglgimbpB1awqljPytzib2M3a6-Rk5weKqCmg&s" alt="Stereo Cafe" class="card-image"></span>
-        <br>
-        <u>Stereo Cafe</u>
-    </a>
-
-    <a href="details.html?id=pepenero-restaurant" class="restaurant" id="pepenero-restaurant">
-        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTMDxZTb6vxECNzyg-4aGecdioCQXaQ2dat5GZkQ4LJA&s" alt="Pepenero Restaurant" class="card-image"></span>
-        <br>
-        <u>Pepenero Restaurant</u>
-    </a>
-
-    <a href="details.html?id=sizzler-restaurant" class="restaurant" id="sizzler-restaurant">
-        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF7LpzjWvqnc4lKarJ83F4SJdsGVcf6G93AsSdaxpEtw&s" alt="Sizzler Restaurant" class="card-image"></span>
-        <br>
-        <u>Sizzler</u>
-    </a>
-
-    <a href="details.html?id=la-casetta" class="restaurant" id="la-casetta">
-        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkLnNOVnAbblP-gdZvqbRyhAiRZmUey52mZ7uW9hm0-g&s" alt="La Casetta" class="card-image"></span>
-        <br>
-        <u>La Casetta</u>
-    </a>
-
-    <a href="details.html?id=skas" class="restaurant" id="skas">
-        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDsN8pdznL1pSxp6XFxrEU3GOfhXbqM94H17pbtLHzkg&s" alt="Skas" class="card-image"></span>
-        <br>
-        <u>Skas</u>
-    </a>
-
-    <a href="details.html?id=the-lemon-tree-and-co" class="restaurant" id="the-lemon-tree-and-co">
-        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJcxroGQztFL3FKzUHNZza9zxKBqde-WkofScKUs9-VFnUd43sckOTFSMQ__xelCViugk&usqp=CAU" alt="The Lemon Tree And Co" class="card-image"></span>
-        <br>
-        <u>The Lemon Tree And Co</u>
-    </a>
+   
 </section>
 
+<!-- Assume this script is part of your restaurant listing page -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
+        const restaurantsContainer = document.getElementById('restaurants');
+    
+        acceptedRestaurants.forEach(restaurant => {
+            const restaurantAnchor = document.createElement('a');
+            restaurantAnchor.href = `details.html?id=${restaurant.id}`;
+            restaurantAnchor.className = 'restaurant';
+            restaurantAnchor.id = restaurant.id;
+            restaurantAnchor.innerHTML = `
+                <span><img src="${restaurant.logoUrl}" alt="${restaurant.name}" class="card-image"></span>
+                <br>
+                <u>${restaurant.name}</u>
+            `;
+            restaurantsContainer.appendChild(restaurantAnchor);
+        });
+    });
+    </script>
 
 
     

@@ -1,9 +1,13 @@
+
 /* Basic styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
     margin: 0;
     padding: 0;
+
+
+>
 }
 
 header {
@@ -14,6 +18,7 @@ header {
 }
 
 h1 {
+
     margin: 0;
 }
 
@@ -26,12 +31,14 @@ main {
     flex-wrap:wrap;
     gap: 20px;
 
+
 }
 
 .restaurant-card {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
     width: 200px;
     padding: 20px;
 }
@@ -57,4 +64,5 @@ main {
 .edit-btn:hover,
 .remove-btn:hover {
     background-color: #0056b3;
+
 }

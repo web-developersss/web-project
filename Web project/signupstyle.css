@@ -61,24 +61,46 @@ input[type="submit"] {
     color: white;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s; /* Add transition */
 }
 
-input[type="submit"]:hover {
+input[type="submit"] {
+    z-index: 1;
+    position: relative;
+    font-size: inherit;
+    font-family: inherit;
+    color: white;
+    padding: 0.5em 1em;
+    outline: none;
+    border: none;
+    background-color: black;
+  }
+  
+  input[type="submit"]::before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color:gray;
+    transform-origin: center bottom;
+    transform: scaleY(0);
+    transition: transform 0.25s ease-in-out;
+  }
+  
+  input[type="submit"]:hover {
+    cursor: pointer;
     background-color: #444;
-}
+    opacity: 1; 
+  }
+  
+  input[type="submit"]:hover::before {
+    transform-origin: center top;
+    transform: scaleY(1);
+  }
 
-a {
-    color: black;
-    font-size: 20px;
-    margin-bottom: 20px;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-a:hover {
-    color: #333;
-}
 
 .password-container {
     position: relative;
@@ -98,4 +120,22 @@ a:hover {
     -webkit-text-security: none;
     -moz-text-security: none;
     text-security: none;
+}
+
+
+h6{
+    color: black;
+    font-size: 13px;
+    text-align: right;
+    margin-right: auto;
+}
+a {
+    font-size: 13px;
+    margin-bottom: 20px;
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Add transition */
+}
+
+a[href="#"] {
+    color: blue; /* Set color to blue for the specified link */
 }
