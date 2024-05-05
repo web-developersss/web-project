@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     var username = localStorage.getItem('username');
+    var userInfo = document.getElementById('userInfo');
     var userInfoForm = document.getElementById('userInfoForm');
     var nameField = document.getElementById('name');
     var emailField = document.getElementById('email');
@@ -9,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var saveButton = document.getElementById('saveButton');
 
     if (username) {
+
         // First, check if the user is the admin
         if (username === "admin@123") {
             userInfo.innerHTML = 'Logged in as Admin';
@@ -53,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
 
+
         var savedUsers = JSON.parse(localStorage.getItem('users')) || [];
         var user = savedUsers.find(function(user) {
             return user.email === username;
@@ -64,12 +67,13 @@ document.addEventListener('DOMContentLoaded', function() {
             phoneField.value = user.phone;
         } else {
             userInfoForm.style.display = 'none'; // Hide form if user not found
-            document.getElementById('userInfo').textContent = 'User not found.';
+            userInfo.textContent = 'User not found.';
         }
     } else {
 
         userInfoForm.style.display = 'none'; // Hide form if not logged in
-        document.getElementById('userInfo').textContent = 'Not logged in.';
+
+        userInfo.textContent = 'Not logged in.';
 
     }
 
@@ -77,8 +81,11 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('mode', '0'); // Reset user mode
         localStorage.removeItem('username'); // Clear username
 
-        window.location.href = 'Home.html'; // Redirect to login page instead of using history.back()
-    
+        console.log('Logging out...'); // Log to check if the event listener is triggered
+        window.location.href = 'Home.html'; // Redirect to homepage
+    });
+
+
     editButton.addEventListener('click', function() {
         nameField.readOnly = false;
         emailField.readOnly = false;
