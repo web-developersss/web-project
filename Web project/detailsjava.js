@@ -70,52 +70,56 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //modes for sign in
 document.addEventListener('DOMContentLoaded', function() {
-    // Assuming 'mode' and 'username' are stored in local storage
     var mode = localStorage.getItem('mode'); // 0 for signed out, 1 for signed in
-    var username = localStorage.getItem('username'); // Username stored after signing in
+    var username = localStorage.getItem('username');
 
     if (mode === '1' && username) {
-        // Change the navbar to show the username instead of "Sign In"
         var signinLink = document.getElementById('signinLink');
-        signinLink.textContent =  username+ ' \uD83D\uDC68'; // Change the text to username
-        signinLink.href = 'profile.html'; // Optionally change the href if it should link to a profile or log out page
+        signinLink.textContent = username + ' \uD83D\uDC68'; // Display the username with an emoji
+        signinLink.href = 'profile.html';
     }
-});
 
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
 
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-
-    // Check if the user is admin
-    if (email === 'admin@123' && password === '123') {
-        // Set mode and username in local storage
-        localStorage.setItem('mode', '1');
-        localStorage.setItem('username', email); // Assuming the email is the username for simplicity
-
-        // Redirect to admin.html
-        window.location.href = 'admin.html';
-    } else {
-        // Check if the user exists in the savedUsers array
-        var savedUsers = JSON.parse(localStorage.getItem('users')) || [];
-        var userExists = savedUsers.some(function(user) {
-            return user.email === email && user.password === password;
-        });
-
-        if (userExists) {
-            // Set mode and username in local storage
+        // Admin check
+        if (email === 'admin@123' && password === '123') {
             localStorage.setItem('mode', '1');
-            localStorage.setItem('username', email); // Assuming the email is the username for simplicity
+            localStorage.setItem('username', 'admin@123'); // Admin as a special username
+            window.location.href = 'admin.html';
+        } else {
+            var allUsers = JSON.parse(localStorage.getItem('users')) || [];
+            var acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
+            var requestFormData = JSON.parse(localStorage.getItem('requestFormData')) || [];
 
-            // Redirect to home page or reload the page
-            history.back();
-                } else {
-            alert('Invalid email or password. Please try again.');
+            // Combine all user data sources into one array
+            var combinedUsers = allUsers.concat(acceptedRestaurants, requestFormData);
+
+            var userExists = combinedUsers.some(function(user) {
+                return user.email === email && user.password === password;
+            });
+
+            if (userExists) {
+                localStorage.setItem('mode', '1');
+                localStorage.setItem('username', email);
+                history.back(); // Go back to the previous page or redirect as needed
+            } else {
+                alert('Invalid email or password. Please try again.');
+            }
         }
-    }
+    });
 });
+
+
+
+
+
+
+
+
 
 
 document.getElementById('reservation-button').addEventListener('click', function() {
@@ -177,6 +181,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('location-icon').href = `http://maps.google.com/?q=${restaurant.location}`;
         document.getElementById('phone-number').textContent = restaurant.phone;
         document.getElementById('menu-icon').href = restaurant.menuUrl;
+
+        const reservationSubmitButton = document.getElementById('reservation-submit');
+        reservationSubmitButton.value = restaurant.email;
+
     } else {
         console.error('Restaurant data not found.');
     }
@@ -212,6 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = {
             status:'pending',
             username: username,
+            rusername:document.getElementById('reservation-submit').value,
             number: document.getElementById('number').value,
             date: document.getElementById('date').value,
             time: document.getElementById('time').value

@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
           
         // Redirect to the page where requests are displayed
-        window.location.href = 'home.html';
+        window.location.href = 'signin.html';
     });
 });
 
@@ -77,6 +77,7 @@ function acceptRequest(index) {
         id: acceptedRequest.email.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase(), // creating a simple id from email
         name: acceptedRequest.name,
         email: acceptedRequest.email,
+        password: acceptedRequest.password,
         phone: acceptedRequest.phone,
         location: acceptedRequest.location,
         openingTime: acceptedRequest.openingTime,
