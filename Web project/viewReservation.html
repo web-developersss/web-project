@@ -13,33 +13,40 @@
             <thead>
                 <tr>
                     <th>Reservation ID</th>
-                    <th> Restaurant Name</th>
-                    <th>Username/Email</th>
+                    <th>Restaurant Username</th>
+                    <th>Guest Username</th>
                     <th>Date</th>
                     <th>Time</th>
                     <th>Guests</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>sizzler </td>
-                    <td>salma@gmail.com</td>
-                    <td>2024-05-01</td>
-                    <td>6:00pm</td>
-                    <td>4</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>stereo</td>
-                    <td>shahd Hesham</td>
-                    <td>2024-08-18</td>
-                    <td>9:00pm</td>
-                    <td>2</td>
-                </tr>
-          
+                <!-- Rows will be dynamically populated here -->
             </tbody>
         </table>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Retrieve reservation data from localStorage
+            var reservations = JSON.parse(localStorage.getItem('reservations')) || [];
+
+            // Get the table body element
+            var tableBody = document.querySelector('tbody');
+
+            reservations.forEach(function(reservation, index) {
+                // Create a new row for each reservation
+                var newRow = tableBody.insertRow();
+                newRow.insertCell().textContent = index + 1; // Reservation ID
+                newRow.insertCell().textContent = reservation.rusername; // Restaurant Name
+                newRow.insertCell().textContent = reservation.username; // Username/Email
+                newRow.insertCell().textContent = reservation.date; // Date
+                newRow.insertCell().textContent = reservation.time; // Time
+                newRow.insertCell().textContent = reservation.number; // Guests
+                newRow.insertCell().textContent = reservation.status; // Status
+            });
+        });
+    </script>
 </body>
 </html>

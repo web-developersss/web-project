@@ -39,8 +39,9 @@ function updateTable() {
     tableBody.innerHTML = ''; // Clear existing table rows
     var username = localStorage.getItem('username');
     var defaultStatus = 'Pending'; 
+    var filteredReservations = reservations.filter(reservation => reservation.rusername === username);
 
-    reservations.forEach(function(reservation) {
+    filteredReservations.forEach(function(reservation) {
         var newRow = tableBody.insertRow();
         newRow.insertCell().textContent = reservation.status; 
         newRow.insertCell().textContent = reservation.username;
