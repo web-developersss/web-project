@@ -69,27 +69,26 @@
 
 
     <div class="container">
-        <form action="#">
-        <select id="category" name="category" required>
-            <option value="" selected disabled>Choose a category</option>
-            <option value="category1"> Fancy outing</option>
-            <option value="category2"> Casual outing</option>
-            <option value="category3"> After party</option>
-            <option value="category4"> Breakfast </option>
-            <option value="category5"> Birthday</option>
+        <form id="category-form" action="#">
+            <select id="category" name="category" required>
+                <option value="" selected disabled>Choose a category</option>
+                <option value="Fancy outing">Fancy outing</option>
+                <option value="Casual outing">Casual outing</option>
+                <option value="After party">After party</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Birthday">Birthday</option>
+            </select>
             <input id="submit" type="submit" value="Choose" title="Choose this category">
-      
-                <!-- HTML for the search bar -->
-                <form id="search-form" action="/search" method="get" target="_self">
-                    <input type="text" placeholder="Want to search for a restaurant?" name="q">
-                    <input type="submit" value="Search">
-                </form>
+        </form>
                 
             
 
-        </select>
+        <form id="search-form" action="/search" method="get" target="_self">
+            <input type="text" placeholder="Want to search for a restaurant?" name="q">
+            <input type="submit" value="Search">
+        </form>
         <!-- HTML for the search bar -->
-    </form> 
+    
 
         <br>
             <label for="checkbox">See Nearby Options?</label>
@@ -107,14 +106,13 @@
 <section class="restaurants" id="restaurants">
    
 </section>
-
-<!-- Assume this script is part of your restaurant listing page -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
+    // Function to render restaurants
+    function renderRestaurants(restaurants) {
         const restaurantsContainer = document.getElementById('restaurants');
-    
-        acceptedRestaurants.forEach(restaurant => {
+        restaurantsContainer.innerHTML = ''; // Clear previous listings
+
+        restaurants.forEach(restaurant => {
             const restaurantAnchor = document.createElement('a');
             restaurantAnchor.href = `details.html?id=${restaurant.id}`;
             restaurantAnchor.className = 'restaurant';
@@ -126,10 +124,31 @@
             `;
             restaurantsContainer.appendChild(restaurantAnchor);
         });
+    }
+
+    // Function to filter and display restaurants based on the selected category
+    function filterByCategory(category) {
+        const acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
+        if (category) {
+            const filteredRestaurants = acceptedRestaurants.filter(restaurant => restaurant.category === category);
+            renderRestaurants(filteredRestaurants);
+        } else {
+            renderRestaurants(acceptedRestaurants); // Show all if no category selected
+        }
+    }
+
+    // Event listener for category selection form
+    document.getElementById('category-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting
+        const selectedCategory = document.getElementById('category').value;
+        filterByCategory(selectedCategory);
     });
-    </script>
 
-
+    // Load all restaurants on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        filterByCategory(''); // Display all by default
+    });
+</script>
     
 </body>
 
