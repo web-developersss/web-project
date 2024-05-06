@@ -181,6 +181,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('location-icon').href = `http://maps.google.com/?q=${restaurant.location}`;
         document.getElementById('phone-number').textContent = restaurant.phone;
         document.getElementById('menu-icon').href = restaurant.menuUrl;
+
+        const reservationSubmitButton = document.getElementById('reservation-submit');
+        reservationSubmitButton.value = restaurant.email;
+
     } else {
         console.error('Restaurant data not found.');
     }
@@ -216,6 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = {
             status:'pending',
             username: username,
+            rusername:document.getElementById('reservation-submit').value,
             number: document.getElementById('number').value,
             date: document.getElementById('date').value,
             time: document.getElementById('time').value
