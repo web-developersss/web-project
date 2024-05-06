@@ -2,7 +2,15 @@ const previousReviews = {}; // Object to store previous reviews
 
 function makeReservation(reservationId) {
     // Your logic for making a new reservation goes here
-    alert("Reservation functionality will be implemented here.");
+    openMakeResAgain();
+}
+function openMakeResAgain()
+{
+    document.getElementById('ResAgainModal').style.display = 'block';
+}
+function closeMakeResAgain()
+{
+    document.getElementById('ResAgainModal').style.display = 'none';
 }
 
 function openFeedbackModal(reservationId) {
