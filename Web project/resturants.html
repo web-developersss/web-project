@@ -71,7 +71,7 @@
     <div class="container">
         <form id="category-form" action="#">
             <select id="category" name="category" required>
-                <option value="" selected disabled>Choose a category</option>
+                <option value="All" selected >All</option>
                 <option value="Fancy outing">Fancy outing</option>
                 <option value="Casual outing">Casual outing</option>
                 <option value="After party">After party</option>
@@ -106,6 +106,7 @@
 <section class="restaurants" id="restaurants">
    
 </section>
+
 <script>
     // Function to render restaurants
     function renderRestaurants(restaurants) {
@@ -129,11 +130,11 @@
     // Function to filter and display restaurants based on the selected category
     function filterByCategory(category) {
         const acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
-        if (category) {
+        if (category && category !== "All") {
             const filteredRestaurants = acceptedRestaurants.filter(restaurant => restaurant.category === category);
             renderRestaurants(filteredRestaurants);
         } else {
-            renderRestaurants(acceptedRestaurants); // Show all if no category selected
+            renderRestaurants(acceptedRestaurants); // Show all if "All" is selected
         }
     }
 
@@ -144,9 +145,44 @@
         filterByCategory(selectedCategory);
     });
 
+    // Function to show nearby restaurants
+    function showNearbyRestaurants() {
+        const username = localStorage.getItem('username');
+        if (!username || localStorage.getItem('mode') === '0') {
+            alert('Please sign in to see nearby options.');
+            window.location.href = 'signin.html';
+            return;
+        }
+
+        // Get user location
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find(u => u.email === username);
+
+        if (!user) {
+            alert('User information not found.');
+            return;
+        }
+
+        const userLocation = user.location;
+        const acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
+
+        // Filter restaurants by location
+        const nearbyRestaurants = acceptedRestaurants.filter(restaurant => restaurant.location === userLocation);
+        renderRestaurants(nearbyRestaurants);
+    }
+
+    // Event listener for the "See Nearby Options?" checkbox
+    document.getElementById('checkbox').addEventListener('change', function() {
+        if (this.checked) {
+            showNearbyRestaurants();
+        } else {
+            filterByCategory("All");
+        }
+    });
+
     // Load all restaurants on page load
     document.addEventListener('DOMContentLoaded', function() {
-        filterByCategory(''); // Display all by default
+        filterByCategory("All"); // Display all by default
     });
 </script>
     

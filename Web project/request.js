@@ -103,7 +103,14 @@ function acceptRequest(index) {
 
 
 function declineRequest(index) {
-    // Decline request logic
-    console.log('Declined Request:', index);
-}
+    let requests = JSON.parse(localStorage.getItem('requestFormData')) || [];
 
+    // Remove the declined request from the requests array
+    requests.splice(index, 1);
+
+    // Update local storage
+    localStorage.setItem('requestFormData', JSON.stringify(requests));
+
+    // Optionally reload or update the page content
+    location.reload();
+}

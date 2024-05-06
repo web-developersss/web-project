@@ -109,18 +109,48 @@
         button[type="submit"]:hover {
             background-color: #996633;
         }
+
+        .hidden {
+            display: none;
+        }
+        #type {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            background-color: #fff;
+            appearance: none; /* Remove default dropdown arrow */
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'><path d='M7 10l5 5 5-5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="url"],
+        input[type="time"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            background-color: #fff;
+        }
+
     </style>
 </head>
 
 
-
-
-
-
-
 <body>
     <div class="container">
-        <h2>Manage Data</h2>
+      <header> <h1>Manage Data</h1></header> 
         <label for="type">Type:</label>
         <select id="type" name="type" required>
             <option value="Restaurant">Restaurant</option>
@@ -192,6 +222,70 @@
             <button type="submit" id="add-restaurant-button">+</button>
         </form>
 
+        <form id="editRestaurantForm" class="hidden">
+            <h2>Edit Restaurant</h2>
+            <input type="hidden" id="edit-restaurant-index">
+
+            <label for="edit-restaurant-name">Restaurant Name:</label>
+            <input type="text" id="edit-restaurant-name" name="restaurantName" required>
+
+            <label for="edit-restaurant-address">Address:</label>
+            <input type="text" id="edit-restaurant-address" name="address" required>
+
+            <label for="edit-restaurant-phone">Phone:</label>
+            <input type="text" id="edit-restaurant-phone" name="phone" required>
+
+            <label for="edit-email">Email:</label>
+            <input type="email" id="edit-email" name="email" placeholder="name@gmail.com" required>
+
+            <label for="edit-password">Password:</label>
+            <input type="password" id="edit-password" name="password" required>
+
+            <label for="edit-location">Location:</label>
+            <select id="edit-location" name="location" required>
+                <option value="" selected disabled>Select your location</option>
+                <option value="Maadi">Maadi</option>
+                <option value="New Cairo">New Cairo</option>
+                <option value="Nasr city">Nasr city</option>
+                <option value="Shrouk">Shrouk</option>
+                <option value="Sheikh Zayed">Sheikh Zayed</option>
+                <option value="6th of October">6th of October</option>
+            </select>
+
+            <label for="edit-opening-time">Opening Time:</label>
+            <input type="time" id="edit-opening-time" name="openingTime" required>
+
+            <label for="edit-closing-time">Closing Time:</label>
+            <input type="time" id="edit-closing-time" name="closingTime" required>
+
+            <label for="edit-description">Description:</label>
+            <textarea id="edit-description" name="description" required></textarea>
+
+            <label for="edit-category">Category:</label>
+            <select id="edit-category" name="category" required>
+                <option value="" selected disabled>Select a category</option>
+                <option value="Fancy outing">Fancy outing</option>
+                <option value="Casual outing">Casual outing</option>
+                <option value="After party">After party</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Birthday">Birthday</option>
+            </select>
+
+            <label for="edit-menu-url">Menu URL:</label>
+            <input type="url" id="edit-menu-url" name="menuUrl" placeholder="http://example.com/menu" required>
+
+            <label for="edit-location-url">Location URL:</label>
+            <input type="url" id="edit-location-url" name="locationUrl" placeholder="http://example.com/location-map" required>
+
+            <label for="edit-logo-url">Logo URL:</label>
+            <input type="url" id="edit-logo-url" name="logoUrl" placeholder="http://example.com/logo" required>
+
+            <label for="edit-photo-url">Photo URL:</label>
+            <input type="url" id="edit-photo-url" name="photoUrl" placeholder="http://example.com/photo" required>
+
+            <button type="submit" id="save-restaurant-button">Save</button>
+        </form>
+
         <form id="userForm" class="hidden">
             <h2>Add User</h2>
             <label for="user-name">Name:</label>
@@ -219,13 +313,45 @@
 
             <button type="submit" id="add-user-button">+</button>
         </form>
+
+        <form id="editUserForm" class="hidden">
+            <h2>Edit User</h2>
+            <input type="hidden" id="edit-user-index">
+
+            <label for="edit-user-name">Name:</label>
+            <input type="text" id="edit-user-name" name="name" required>
+
+            <label for="edit-user-email">Email:</label>
+            <input type="email" id="edit-user-email" name="email" placeholder="name@gmail.com" required>
+
+            <label for="edit-user-password">Password:</label>
+            <input type="password" id="edit-user-password" name="password" required>
+
+            <label for="edit-user-phone">Phone:</label>
+            <input type="text" id="edit-user-phone" name="phone" required>
+
+            <label for="edit-user-location">Location:</label>
+            <select id="edit-user-location" name="location" required>
+                <option value="" selected disabled>Select your location</option>
+                <option value="Maadi">Maadi</option>
+                <option value="New Cairo">New Cairo</option>
+                <option value="Nasr city">Nasr city</option>
+                <option value="Shrouk">Shrouk</option>
+                <option value="Sheikh Zayed">Sheikh Zayed</option>
+                <option value="6th of October">6th of October</option>
+            </select>
+
+            <button type="submit" id="save-user-button">Save</button>
+        </form>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const typeDropdown = document.getElementById('type');
             const restaurantForm = document.getElementById('restaurantForm');
+            const editRestaurantForm = document.getElementById('editRestaurantForm');
             const userForm = document.getElementById('userForm');
+            const editUserForm = document.getElementById('editUserForm');
             const restaurantList = document.getElementById('restaurantList');
             const userList = document.getElementById('userList');
 
@@ -267,15 +393,19 @@
             typeDropdown.addEventListener('change', function() {
                 if (this.value === 'Restaurant') {
                     restaurantForm.classList.remove('hidden');
-                    userForm.classList.add('hidden');
-                    userList.classList.add('hidden');
+                    editRestaurantForm.classList.add('hidden');
                     restaurantList.classList.remove('hidden');
+                    userForm.classList.add('hidden');
+                    editUserForm.classList.add('hidden');
+                    userList.classList.add('hidden');
                     displayRestaurants();
                 } else {
-                    restaurantForm.classList.add('hidden');
                     userForm.classList.remove('hidden');
-                    restaurantList.classList.add('hidden');
+                    editUserForm.classList.add('hidden');
                     userList.classList.remove('hidden');
+                    restaurantForm.classList.add('hidden');
+                    editRestaurantForm.classList.add('hidden');
+                    restaurantList.classList.add('hidden');
                     displayUsers();
                 }
             });
@@ -347,46 +477,130 @@
                 displayUsers();
             };
 
-            // Optional: Function to edit restaurant
+            // Function to edit restaurant
             window.editRestaurant = function(index) {
                 let restaurants = JSON.parse(localStorage.getItem('acceptedRestaurants'));
                 let restaurant = restaurants[index];
-                // Populate form with restaurant data for editing
-                document.getElementById('restaurant-name').value = restaurant.name;
-                document.getElementById('restaurant-address').value = restaurant.address;
-                document.getElementById('restaurant-phone').value = restaurant.phone;
-                document.getElementById('email').value = restaurant.email;
-                document.getElementById('password').value = restaurant.password;
-                document.getElementById('location').value = restaurant.location;
-                document.getElementById('opening-time').value = restaurant.openingTime;
-                document.getElementById('closing-time').value = restaurant.closingTime;
-                document.getElementById('description').value = restaurant.description;
-                document.getElementById('category').value = restaurant.category;
-                document.getElementById('menu-url').value = restaurant.menuUrl;
-                document.getElementById('location-url').value = restaurant.locationUrl;
-                document.getElementById('logo-url').value = restaurant.logoUrl;
-                document.getElementById('photo-url').value = restaurant.photoUrl;
+                document.getElementById('edit-restaurant-index').value = index;
+                document.getElementById('edit-restaurant-name').value = restaurant.name;
+                document.getElementById('edit-restaurant-address').value = restaurant.address;
+                document.getElementById('edit-restaurant-phone').value = restaurant.phone;
+                document.getElementById('edit-email').value = restaurant.email;
+                document.getElementById('edit-password').value = restaurant.password;
+                document.getElementById('edit-location').value = restaurant.location;
+                document.getElementById('edit-opening-time').value = restaurant.openingTime;
+                document.getElementById('edit-closing-time').value = restaurant.closingTime;
+                document.getElementById('edit-description').value = restaurant.description;
+                document.getElementById('edit-category').value = restaurant.category;
+                document.getElementById('edit-menu-url').value = restaurant.menuUrl;
+                document.getElementById('edit-location-url').value = restaurant.locationUrl;
+                document.getElementById('edit-logo-url').value = restaurant.logoUrl;
+                document.getElementById('edit-photo-url').value = restaurant.photoUrl;
+
+                restaurantForm.classList.add('hidden');
+                editRestaurantForm.classList.remove('hidden');
             };
 
-            // Optional: Function to edit user
+            // Save edited restaurant
+            editRestaurantForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const index = document.getElementById('edit-restaurant-index').value;
+                let restaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
+
+                restaurants[index] = {
+                    name: document.getElementById('edit-restaurant-name').value,
+                    address: document.getElementById('edit-restaurant-address').value,
+                    phone: document.getElementById('edit-restaurant-phone').value,
+                    email: document.getElementById('edit-email').value,
+                    password: document.getElementById('edit-password').value,
+                    location: document.getElementById('edit-location').value,
+                    openingTime: document.getElementById('edit-opening-time').value,
+                    closingTime: document.getElementById('edit-closing-time').value,
+                    description: document.getElementById('edit-description').value,
+                    category: document.getElementById('edit-category').value,
+                    menuUrl: document.getElementById('edit-menu-url').value,
+                    locationUrl: document.getElementById('edit-location-url').value,
+                    logoUrl: document.getElementById('edit-logo-url').value,
+                    photoUrl: document.getElementById('edit-photo-url').value
+                };
+
+                localStorage.setItem('acceptedRestaurants', JSON.stringify(restaurants));
+                displayRestaurants();
+
+                restaurantForm.classList.remove('hidden');
+                editRestaurantForm.classList.add('hidden');
+            });
+
+            // Function to edit user
             window.editUser = function(index) {
                 let users = JSON.parse(localStorage.getItem('users'));
                 let user = users[index];
                 // Populate form with user data for editing
-                document.getElementById('user-name').value = user.name;
-                document.getElementById('user-email').value = user.email;
-                document.getElementById('user-password').value = user.password;
-                document.getElementById('user-phone').value = user.phone;
-                document.getElementById('user-location').value = user.location;
+                document.getElementById('edit-user-index').value = index;
+                document.getElementById('edit-user-name').value = user.name;
+                document.getElementById('edit-user-email').value, user.email,
+                document.getElementById('edit-user-email').value = user.email;
+                document.getElementById('edit-user-password').value = user.password;
+                document.getElementById('edit-user-phone').value = user.phone;
+                document.getElementById('edit-user-location').value = user.location;
+
+                userForm.classList.add('hidden');
+                editUserForm.classList.remove('hidden');
             };
 
-            // Initial display based on the selected type
-            if (typeDropdown.value === 'Restaurant') {
-                displayRestaurants();
-            } else {
+            // Save edited user
+            editUserForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const index = document.getElementById('edit-user-index').value;
+                let users = JSON.parse(localStorage.getItem('users')) || [];
+
+                users[index] = {
+                    name: document.getElementById('edit-user-name').value,
+                    email: document.getElementById('edit-user-email').value,
+                    password: document.getElementById('edit-user-password').value,
+                    phone: document.getElementById('edit-user-phone').value,
+                    location: document.getElementById('edit-user-location').value
+                };
+
+                localStorage.setItem('users', JSON.stringify(users));
                 displayUsers();
+
+                userForm.classList.remove('hidden');
+                editUserForm.classList.add('hidden');
+            });
+
+            // Initial display based on the selected type
+            function initializeForms() {
+                const type = typeDropdown.value;
+                if (type === 'Restaurant') {
+                    restaurantForm.classList.remove('hidden');
+                    editRestaurantForm.classList.add('hidden');
+                    restaurantList.classList.remove('hidden');
+                    userForm.classList.add('hidden');
+                    editUserForm.classList.add('hidden');
+                    userList.classList.add('hidden');
+                    displayRestaurants();
+                } else {
+                    userForm.classList.remove('hidden');
+                    editUserForm.classList.add('hidden');
+                    userList.classList.remove('hidden');
+                    restaurantForm.classList.add('hidden');
+                    editRestaurantForm.classList.add('hidden');
+                    restaurantList.classList.add('hidden');
+                    displayUsers();
+                }
             }
+
+            typeDropdown.addEventListener('change', initializeForms);
+            initializeForms(); // Initialize based on default selection
         });
     </script>
 </body>
+
+
+
+
+
 </html>
