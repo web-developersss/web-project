@@ -12,20 +12,22 @@
 
 <body>
     <div class="container">
-        <h1>Sign up</h1>
-        <hr id="line"> 
-        <form>
+        <h2>Sign Up</h2>
+        <form id="signupForm">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
+
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" placeholder="name@gmail.com" required>
+            <div id="emailError" class="error" style="display: none;">This email is already in use. Please choose another.</div>
+
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <label for="phone">Phone:</label>
-            <input type="tel" id="phone" name="phone" required>
-            <label for="location">Location:</label>
 
-            
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" required>
+
+            <label for="location">Location:</label>
             <select id="location" name="location" required>
                 <option value="" selected disabled>Select your location</option>
                 <option value="Maadi">Maadi</option>
@@ -35,10 +37,13 @@
                 <option value="Sheikh Zayed">Sheikh Zayed</option>
                 <option value="6th of October">6th of October</option>
             </select>
+
             <input type="submit" value="Sign Up">
-<H6> Want to add your restaurant?  <a href="restreq.html">Make a request now</a></H6>
+            <H6> Want to add your restaurant?  <a href="restreq.html">Make a request now</a></H6>
+
         </form>
     </div>
+
 </body>
 
 </html>
