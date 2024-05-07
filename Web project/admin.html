@@ -12,8 +12,8 @@
         <nav>
             <ul>
                 <li><a href="requests.html">Requests</a></li>
-                <li><a href="manage-users.html">Manage Users</a></li>
-                <li><a href="viewReservation.html">view reservation</a></li>
+                <li><a href="viewRestraunts.html">Manage Users</a></li>
+                <li><a href="viewReservation.html">View Reservations</a></li>
                 <li><a href="profile.html">Profile</a></li>
             </ul>
         </nav>
@@ -22,35 +22,25 @@
     <div class="dashboard-summary">
         <div class="summary-item">
             <h2>Total clients </h2>
-            <p>150</p>
+            <p> <span id="users-count"></span></p>
+        
         </div>
+
         <div class="summary-item">
             <h2>Requests Pending</h2>
             <p> <span id="request-count"></span></p>
-           <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    // Retrieve the request count from localStorage
-                    const requestCount = parseInt(localStorage.getItem('requestCount')) || 0;
-        
-                    // Display the request count on the page
-                    document.getElementById('request-count').textContent = requestCount;
-                });
-            </script> 
-
-        </div>
-        <div class="summary-item">
-            <h2> Total Restaurants</h2>
            
         </div>
+
+        <div class="summary-item">
+            <h2> Total Restaurants</h2>
+            <p> <span id="restaurants-count"></span></p>
+
+           <script src="admin.js"></script>
+        </div>
     </div>
 
-    <div class="latest-updates">
-        <h2>Latest Updates</h2>
-        <ul>
-            <li>Update 1: System maintenance scheduled for tonight.</li>
-            <li>Update 2: New user features rolled out successfully.</li>
-        </ul>
-    </div>
+    
 
     <footer>
         <p>Admin Dashboard ©️ 2024</p>
