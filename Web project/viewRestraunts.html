@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="viewRestraunts.css">
+
+</head>
+
+
+<body>
+    <div class="container">
+      <header> <h1>Manage Data</h1></header> 
+        <label for="type">Type:</label>
+        <select id="type" name="type" required>
+            <option value="Restaurant">Restaurant</option>
+            <option value="User">User</option>
+        </select>
+
+        <div id="restaurantList" class="list"></div>
+        <div id="userList" class="list hidden"></div>
+
+        <form id="restaurantForm">
+            <h2>Add Restaurant</h2>
+            <label for="restaurant-name">Restaurant Name:</label>
+            <input type="text" id="restaurant-name" name="restaurantName" required>
+
+            <label for="restaurant-phone">Phone:</label>
+            <input type="text" id="restaurant-phone" name="phone" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="name@gmail.com" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="location">Location:</label>
+            <select id="location" name="location" required>
+                <option value="" selected disabled>Select your location</option>
+                <option value="Maadi">Maadi</option>
+                <option value="New Cairo">New Cairo</option>
+                <option value="Nasr city">Nasr city</option>
+                <option value="Shrouk">Shrouk</option>
+                <option value="Sheikh Zayed">Sheikh Zayed</option>
+                <option value="6th of October">6th of October</option>
+            </select>
+
+            <label for="opening-time">Opening Time:</label>
+            <input type="time" id="opening-time" name="openingTime" required>
+
+            <label for="closing-time">Closing Time:</label>
+            <input type="time" id="closing-time" name="closingTime" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="" selected disabled>Select a category</option>
+                <option value="Fancy outing">Fancy outing</option>
+                <option value="Casual outing">Casual outing</option>
+                <option value="After party">After party</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Birthday">Birthday</option>
+            </select>
+
+            <label for="menu-url">Menu URL:</label>
+            <input type="url" id="menu-url" name="menuUrl" placeholder="http://example.com/menu" required>
+
+            <label for="location-url">Location URL:</label>
+            <input type="url" id="location-url" name="locationUrl" placeholder="http://example.com/location-map" required>
+
+            <label for="logo-url">Logo URL:</label>
+            <input type="url" id="logo-url" name="logoUrl" placeholder="http://example.com/logo" required>
+
+            <label for="photo-url">Photo URL:</label>
+            <input type="url" id="photo-url" name="photoUrl" placeholder="http://example.com/photo" required>
+
+            <button type="submit" id="add-restaurant-button">+</button>
+        </form>
+
+        <form id="editRestaurantForm" class="hidden">
+            <h2>Edit Restaurant</h2>
+            <input type="hidden" id="edit-restaurant-index">
+
+            <label for="edit-restaurant-name">Restaurant Name:</label>
+            <input type="text" id="edit-restaurant-name" name="restaurantName" required>
+
+            <label for="edit-restaurant-phone">Phone:</label>
+            <input type="text" id="edit-restaurant-phone" name="phone" required>
+
+            <label for="edit-email">Email:</label>
+            <input type="email" id="edit-email" name="email" placeholder="name@gmail.com" required>
+
+            <label for="edit-password">Password:</label>
+            <input type="password" id="edit-password" name="password" required>
+
+            <label for="edit-location">Location:</label>
+            <select id="edit-location" name="location" required>
+                <option value="" selected disabled>Select your location</option>
+                <option value="Maadi">Maadi</option>
+                <option value="New Cairo">New Cairo</option>
+                <option value="Nasr city">Nasr city</option>
+                <option value="Shrouk">Shrouk</option>
+                <option value="Sheikh Zayed">Sheikh Zayed</option>
+                <option value="6th of October">6th of October</option>
+            </select>
+
+            <label for="edit-opening-time">Opening Time:</label>
+            <input type="time" id="edit-opening-time" name="openingTime" required>
+
+            <label for="edit-closing-time">Closing Time:</label>
+            <input type="time" id="edit-closing-time" name="closingTime" required>
+
+            <label for="edit-description">Description:</label>
+            <textarea id="edit-description" name="description" required></textarea>
+
+            <label for="edit-category">Category:</label>
+            <select id="edit-category" name="category" required>
+                <option value="" selected disabled>Select a category</option>
+                <option value="Fancy outing">Fancy outing</option>
+                <option value="Casual outing">Casual outing</option>
+                <option value="After party">After party</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Birthday">Birthday</option>
+            </select>
+
+            <label for="edit-menu-url">Menu URL:</label>
+            <input type="url" id="edit-menu-url" name="menuUrl" placeholder="http://example.com/menu" required>
+
+            <label for="edit-location-url">Location URL:</label>
+            <input type="url" id="edit-location-url" name="locationUrl" placeholder="http://example.com/location-map" required>
+
+            <label for="edit-logo-url">Logo URL:</label>
+            <input type="url" id="edit-logo-url" name="logoUrl" placeholder="http://example.com/logo" required>
+
+            <label for="edit-photo-url">Photo URL:</label>
+            <input type="url" id="edit-photo-url" name="photoUrl" placeholder="http://example.com/photo" required>
+
+            <button type="submit" id="save-restaurant-button">Save</button>
+        </form>
+
+        <form id="userForm" class="hidden">
+            <h2>Add User</h2>
+            <label for="user-name">Name:</label>
+            <input type="text" id="user-name" name="name" required>
+
+            <label for="user-email">Email:</label>
+            <input type="email" id="user-email" name="email" placeholder="name@gmail.com" required>
+
+            <label for="user-password">Password:</label>
+            <input type="password" id="user-password" name="password" required>
+
+            <label for="user-phone">Phone:</label>
+            <input type="text" id="user-phone" name="phone" required>
+
+            <label for="user-location">Location:</label>
+            <select id="user-location" name="location" required>
+                <option value="" selected disabled>Select your location</option>
+                <option value="Maadi">Maadi</option>
+                <option value="New Cairo">New Cairo</option>
+                <option value="Nasr city">Nasr city</option>
+                <option value="Shrouk">Shrouk</option>
+                <option value="Sheikh Zayed">Sheikh Zayed</option>
+                <option value="6th of October">6th of October</option>
+            </select>
+
+            <button type="submit" id="add-user-button">+</button>
+        </form>
+
+        <form id="editUserForm" class="hidden">
+            <h2>Edit User</h2>
+            <input type="hidden" id="edit-user-index">
+
+            <label for="edit-user-name">Name:</label>
+            <input type="text" id="edit-user-name" name="name" required>
+
+            <label for="edit-user-email">Email:</label>
+            <input type="email" id="edit-user-email" name="email" placeholder="name@gmail.com" required>
+
+            <label for="edit-user-password">Password:</label>
+            <input type="password" id="edit-user-password" name="password" required>
+
+            <label for="edit-user-phone">Phone:</label>
+            <input type="text" id="edit-user-phone" name="phone" required>
+
+            <label for="edit-user-location">Location:</label>
+            <select id="edit-user-location" name="location" required>
+                <option value="" selected disabled>Select your location</option>
+                <option value="Maadi">Maadi</option>
+                <option value="New Cairo">New Cairo</option>
+                <option value="Nasr city">Nasr city</option>
+                <option value="Shrouk">Shrouk</option>
+                <option value="Sheikh Zayed">Sheikh Zayed</option>
+                <option value="6th of October">6th of October</option>
+            </select>
+
+            <button type="submit" id="save-user-button">Save</button>
+        </form>
+    </div>
+
+    <script src="viewRestraunts.js"></script>
+</body>
+
+
+
+
+
+</html>

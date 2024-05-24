@@ -119,7 +119,6 @@ input[type="submit"] {
 #password[type="text"] {
     -webkit-text-security: none;
     -moz-text-security: none;
-    text-security: none;
 }
 
 
@@ -138,4 +137,10 @@ a {
 
 a[href="#"] {
     color: blue; /* Set color to blue for the specified link */
+}
+.error {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
 }
