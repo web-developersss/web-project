@@ -91,9 +91,3 @@ input[type="submit"] {
         font-size: 12px;  
     }
 }
-.error {
-    color: red;
-    font-size: 12px;
-    margin-top: -10px;
-    margin-bottom: 10px;
-}

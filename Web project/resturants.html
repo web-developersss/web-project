@@ -40,9 +40,24 @@
             </div>
         </div>
     </div>
-   
-            
     
+    <script>
+        let slideIndex = 0;
+        showSlides();
+        
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 4000); // Change image every 4 seconds
+        }
+        </script>
+            
+            
 
     <div class="moving-text-container">
         <p class="moving-text">
@@ -50,52 +65,151 @@
         </p>
         
     </div>
+    <div class="container"><form id="search-form" action="/search" method="get" target="_self">
+        <input type="text" placeholder="Want to search for a restaurant?" name="q">
+        <input type="submit" value="Search">
+    </form></div>
     
-    
+    <label for="checkbox">See Nearby Options?</label>
+    <input type="checkbox" id="checkbox" name="checkbox">
 
 
-    <div class="container">
-        <form id="category-form" action="#">
-            <select id="category" name="category" required>
-                <option value="All" selected >All</option>
-                <option value="Fancy outing">Fancy outing</option>
-                <option value="Casual outing">Casual outing</option>
-                <option value="After party">After party</option>
-                <option value="Breakfast">Breakfast</option>
-                <option value="Birthday">Birthday</option>
-            </select>
-            <input id="submit" type="submit" value="Choose" title="Choose this category">
-        </form>
-                
-            
-
-        <form id="search-form" action="/search" method="get" target="_self">
-            <input type="text" placeholder="Want to search for a restaurant?" name="q">
-            <input type="submit" value="Search">
-        </form>
-        <!-- HTML for the search bar -->
-    
-
-        <br>
-            <label for="checkbox">See Nearby Options?</label>
-            <input type="checkbox" id="checkbox" name="checkbox">
+    <div class="category">
        
+        <div class="category">
+            <button class="category" onclick="selectCategory('category1')">
+                <img src="https://t3.ftcdn.net/jpg/06/37/16/64/360_F_637166455_RZOHg6K3M6noLPKQmOHH5ZI70zXEyDaq.jpg" alt="Category 1">
+                Fancy outing
+            </button>
+            <button class="category" onclick="selectCategory('category2')">
+                <img src="https://images.affordableseating.net/dpr_1.0,f_auto,q_auto/afd/media/contenttype/fast_casual_restaurant.jpg" alt="Category 2">
+                Casual outing
+            </button>
+            <button class="category" onclick="selectCategory('category3')">
+                <img src="https://mindyweiss.com/wp-content/uploads/2018/05/FT4A2907-2-1024x683.jpg" alt="Category 3">
+                After party
+            </button>
+            <button class="category" onclick="selectCategory('category4')">
+                <img src="http://www.egypttoday.com/siteimages/Larg/2022051606020424.jpg" alt="Category 4">
+                Breakfast
+            </button>
+            <button class="category" onclick="selectCategory('category5')">
+                <img src="https://assets-global.website-files.com/64c20b61ae8773a0066d0afe/653643b33e0582cd877abd95_beautiful-young-woman-in-cokctail-dress-blowing-ca-2022-12-16-14-00-04-utc%20(1)-p-1080.jpg" alt="Category 5">
+                Birthday
+            </button>
+        </div>
+        
+    </div>
     
-
-
-</div>
         
         
 
 
 
-<section class="restaurants" id="restaurants">
-   
+<section class="restaurants" id="restaurantsContainer">
+    <a href="details.html?id=stereo-cafe" class="restaurant" id="stereo-cafe">
+        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpMLLuBoglgimbpB1awqljPytzib2M3a6-Rk5weKqCmg&s" alt="Stereo Cafe" class="card-image"></span>
+        <br>
+        <u>Stereo Cafe</u>
+    </a>
+
+    <a href="details.html?id=pepenero-restaurant" class="restaurant" id="pepenero-restaurant">
+        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTMDxZTb6vxECNzyg-4aGecdioCQXaQ2dat5GZkQ4LJA&s" alt="Pepenero Restaurant" class="card-image"></span>
+        <br>
+        <u>Pepenero Restaurant</u>
+    </a>
+
+    <a href="details.html?id=sizzler-restaurant" class="restaurant" id="sizzler-restaurant">
+        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF7LpzjWvqnc4lKarJ83F4SJdsGVcf6G93AsSdaxpEtw&s" alt="Sizzler Restaurant" class="card-image"></span>
+        <br>
+        <u>Sizzler</u>
+    </a>
+
+    <a href="details.html?id=la-casetta" class="restaurant" id="la-casetta">
+        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkLnNOVnAbblP-gdZvqbRyhAiRZmUey52mZ7uW9hm0-g&s" alt="La Casetta" class="card-image"></span>
+        <br>
+        <u>La Casetta</u>
+    </a>
+
+    <a href="details.html?id=skas" class="restaurant" id="skas">
+        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDsN8pdznL1pSxp6XFxrEU3GOfhXbqM94H17pbtLHzkg&s" alt="Skas" class="card-image"></span>
+        <br>
+        <u>Skas</u>
+    </a>
+
+    <a href="details.html?id=the-lemon-tree-and-co" class="restaurant" id="the-lemon-tree-and-co">
+        <span><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJcxroGQztFL3FKzUHNZza9zxKBqde-WkofScKUs9-VFnUd43sckOTFSMQ__xelCViugk&usqp=CAU" alt="The Lemon Tree And Co" class="card-image"></span>
+        <br>
+        <u>The Lemon Tree And Co</u>
+    </a>
 </section>
 
-<script src="restaurants.js">
-   
+<!-- Assume this script is part of your restaurant listing page -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
+        const restaurantsContainer = document.getElementById('restaurants');
     
+        acceptedRestaurants.forEach(restaurant => {
+            const restaurantAnchor = document.createElement('a');
+            restaurantAnchor.href = `details.html?id=${restaurant.id}`;
+            restaurantAnchor.className = 'restaurant';
+            restaurantAnchor.id = restaurant.id;
+            restaurantAnchor.innerHTML = `
+                <span><img src="${restaurant.logoUrl}" alt="${restaurant.name}" class="card-image"></span>
+                <br>
+                <u>${restaurant.name}</u>
+            `;
+            restaurantsContainer.appendChild(restaurantAnchor);
+        });
+    });
+    </script>
+
+<script> 
+    document.addEventListener('DOMContentLoaded', function() {
+    // This code runs after the DOM has fully loaded
+
+    // Adding event listener to the search form
+    let searchForm = document.getElementById('search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+            
+            // Get the value entered in the search input
+            let searchQueryInput = searchForm.querySelector('input[name="q"]');
+            if (searchQueryInput) {
+                let searchQuery = searchQueryInput.value.toLowerCase().trim();
+                
+                // Loop through each restaurant link
+                let restaurantLinks = document.querySelectorAll('.restaurant');
+                let found = false;
+                restaurantLinks.forEach(function(link) {
+                    let restaurantName = link.textContent.toLowerCase(); // Get the restaurant name
+                    // Check if the search query matches the restaurant name
+                    if (restaurantName.includes(searchQuery)) {
+                        let restaurantUrl = link.getAttribute('href'); // Get the URL of the matching restaurant link
+                        if (restaurantUrl) {
+                            window.location.href = restaurantUrl; // Navigate to the restaurant page
+                            found = true;
+                        }
+                        return; // Exit the loop once a match is found
+                    }
+                });
+
+                // If no matching restaurant is found, display an alert
+                if (!found) {
+                    alert("No matching restaurant found!");
+                }
+            } else {
+                console.error("Search query input element not found.");
+            }
+        });
+    } else {
+        console.error("Search form element not found.");
+    }
+});
+
+
 </script>
     
 </body>

@@ -8,17 +8,7 @@ body, html {
     overflow-x: hidden; /* Prevent horizontal scroll */
   }
   
-  .container {
-    width: 100%; /* Make sure outer containers are also full width */
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px; /* Add bottom margin */
-    position: relative;
-    display: inline-block;
-  }
+ 
   
    
 
@@ -217,40 +207,80 @@ border: none;
 
 
 
-.container input[type=text] {
-    padding: 10px;
-    width: 325px;
-    border: 1px solid black;
-    height: 20px;
-    border-radius: 15px;
-    font-size: 16px;
-margin-top: 20px;    
+.container {
+    width: 100%;
+    text-align: center; /* Center the input elements horizontally */
+    margin-bottom: 20px;
 }
 
-.container input[type=submit] {
-    margin-left: 15px;
+.container input[type="text"],
+.container input[type="submit"] {
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+    font-size: 16px;
+    vertical-align: middle; /* Align the input elements vertically */
+}
+
+.container input[type="text"] {
+    width: 300px;
+    height: 23px;
+}
+
+.container input[type="submit"] {
     width: 100px;
     padding: 3px;
     font-size: 17px;
     border-radius: 10px;
     cursor: pointer;
+    margin-left: 10px;
 }
+
+
 
 .container input[type=submit]:hover {
     background-color: darkgray;
 }
+/* Style for category container */
+/* Style for category container */
+.category {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
 
-.restaurant {
-    display: inline-block;
-    margin: 10px;
+/* Style for category buttons */
+.category button {
+    width: 170px;
+    height: 170px; 
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.category button:hover {
+    background-color: #e6e6e6;
+    transform: translateY(-5px);
+}
+
+/* Style for category button images */
+.category button img {
+    max-width: 120px;
+    max-height: 120px;
+    margin-bottom: 10px;
+}
+
+/* Style for category button text */
+.category button span {
+    font-size: 16px;
     color: #333;
 }
-
-.card-image {
-    width: 100px; /* Adjust size as needed */
-    height: auto;
-    border-radius: 5px;
-}
-
-/* Add more styles as necessary */
