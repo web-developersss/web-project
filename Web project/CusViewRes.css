@@ -150,8 +150,4 @@ input#star5:checked ~ label#star1:before {
     text-decoration: none;
     cursor: pointer;
 }
-.scrollable-reservations {
-    max-height: 400px;
-    overflow-y: auto;
-    padding-right: 10px;
-}
+
