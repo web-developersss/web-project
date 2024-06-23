@@ -4,7 +4,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
 const app = express();
 const port = 3001;
-const dbURI = 'mongodb+srv://hatem_1234567:F2EtlzpKM2v7t977@cluster0.zzlforu.mongodb.net/collection?retryWrites=true&w=majority&appName=Cluster0';
+const dbURI = 'mongodb+srv://hatem_1234567:qJg1kVrmmu20TX9V@cluster0.zzlforu.mongodb.net/collection?retryWrites=true&w=majority&appName=Cluster0';
 const path = require('path');
 const customerdata = require("./models/CustomersSchema");
 const restaurantdata = require("./models/Restaurantschema");
@@ -246,6 +246,51 @@ app.get('/logout', (req, res) => {
       res.redirect('/');
   });
 });
+
+
+
+
+
+app.get('/requests', async (req, res) => {
+    try {
+        const pendingRestaurants = await restaurantdata.find({ status: 'pending' });
+
+        res.render('requests', { restaurants: pendingRestaurants });
+    } catch (error) {
+        console.error('Error fetching pending restaurants:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+app.post('/requests/:id/accept', async (req, res) => {
+    const restaurantId = req.params.id;
+
+    try {
+        await restaurantdata.findByIdAndUpdate(restaurantId, { status: 'accepted' });
+        res.redirect('/requests'); // Redirect back to view requests page
+    } catch (err) {
+        console.error('Error accepting restaurant:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+app.post('/requests/:id/decline', async (req, res) => {
+    const restaurantId = req.params.id;
+
+    try {
+        await restaurantdata.findByIdAndDelete(restaurantId);
+        res.redirect('/requests'); // Redirect back to view requests page
+    } catch (err) {
+        console.error('Error declining restaurant:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+
+
 
 
 
