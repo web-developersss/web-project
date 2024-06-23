@@ -1,22 +1,3 @@
- // Function to render restaurants
- function renderRestaurants(restaurants) {
-    const restaurantsContainer = document.getElementById('restaurants');
-    restaurantsContainer.innerHTML = ''; // Clear previous listings
-
-    restaurants.forEach(restaurant => {
-        const restaurantAnchor = document.createElement('a');
-        restaurantAnchor.href = `details.html?id=${restaurant.id}`;
-        restaurantAnchor.className = 'restaurant';
-        restaurantAnchor.id = restaurant.id;
-        restaurantAnchor.innerHTML = `
-            <span><img src="${restaurant.logoUrl}" alt="${restaurant.name}" class="card-image"></span>
-            <br>
-            <u>${restaurant.name}</u>
-        `;
-        restaurantsContainer.appendChild(restaurantAnchor);
-    });
-}
-
 // Function to filter and display restaurants based on the selected category
 function filterByCategory(category) {
     const acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
