@@ -73,6 +73,7 @@ app.get('/resturants', async (req, res) => {
     }
 });
 
+
 app.get('/restaurant/:id', async (req, res) => {
     try {
         const restaurantId = req.params.id;
@@ -86,18 +87,6 @@ app.get('/restaurant/:id', async (req, res) => {
     }
 });
 
-app.get('/restaurant/:id', (req, res) => {
-  const restaurantId = req.params.id;
-  restaurantdata.findById(restaurantId)
-      .then(restaurant => {
-          if (restaurant) {
-              res.render('/details', { user: req.session.user });
-          } else {
-              res.send('Restaurant not found');
-          }
-      })
-      .catch(err => console.log(err));
-});
 
 app.get('/aboutUs', (req, res) => {
     res.render('aboutUs', { user: req.session.user });
@@ -112,8 +101,9 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/customerssignup', (req, res) => {
-    res.render('customerssignup', { user: req.session.user });
+    res.render('customerssignup', { errorMessage: null, formData: {} });
 });
+
 
 app.get('/restreq', (req, res) => {
     res.render('restreq', { user: req.session.user });
@@ -128,12 +118,28 @@ app.get('/profile', (req, res) => {
 
 
 
-app.post('/customerssignup', (req, res) => {
-    const cdata = new customerdata(req.body);
-    cdata.save()
-        .then(() => { res.redirect('/signin'); })
-        .catch((err) => { console.log(err); });
+app.post('/customerssignup', async (req, res) => {
+    const { email, name, password, phone, location } = req.body;
+
+    try {
+        // Check if email already exists in customerdata or restaurantdata or if it's the admin email
+        const customer = await customerdata.findOne({ email });
+        const restaurant = await restaurantdata.findOne({ email });
+
+        if (email === 'admin@123' || customer || restaurant) {
+            return res.render('customerssignup', { errorMessage: 'This email is already in use. Please choose another.', formData: req.body });
+        }
+
+        // If email is not taken, create a new customer
+        const cdata = new customerdata({ name, email, password, phone, location });
+        await cdata.save();
+        res.redirect('/signin');
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+    }
 });
+
 
 app.post('/restreq', (req, res) => {
     const rdata = new restaurantdata(req.body);
