@@ -364,4 +364,27 @@ margin-top: 20px;
 .card-back {
     background-color: #3498db; /* Blue background for back of card */
     transform: rotateY(180deg); /* Initially hidden */
+/* Add this to your existing CSS file or create a new one */
+}
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: #f2f2f2;
+    color: black;
+    border-radius: 5px;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover {
+    background-color: #ddd;
 }
