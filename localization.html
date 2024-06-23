@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Localization Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1, p {
+            margin-bottom: 10px;
+        }
+
+        .lang-select {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="greeting"></h1>
+    <p id="message"></p>
+
+    <div class="lang-select">
+        <label for="language-select">Select Language:</label>
+        <select id="language-select">
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="es">Spanish</option>
+        </select>
+    </div>
+
+    <script>
+        // Define translations
+        const translations = {
+            en: {
+                greeting: 'Welcome to our Website!',
+                message: 'This is a simple example of localization.'
+            },
+            fr: {
+                greeting: 'Bienvenue sur notre site web !',
+                message: 'Ceci est un exemple simple de localisation.'
+            },
+            es: {
+                greeting: '¡Bienvenido a nuestro sitio web!',
+                message: 'Este es un ejemplo simple de localización.'
+            }
+        };
+
+        // Function to set text based on selected language
+        function setLanguageText(language) {
+            document.getElementById('greeting').textContent = translations[language].greeting;
+            document.getElementById('message').textContent = translations[language].message;
+        }
+
+        // Event listener for language selection change
+        document.getElementById('language-select').addEventListener('change', function(event) {
+            const selectedLanguage = event.target.value;
+            setLanguageText(selectedLanguage);
+        });
+
+        // Initialize with default language
+        setLanguageText('en');
+    </script>
+</body>
+</html>
