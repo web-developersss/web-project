@@ -17,9 +17,11 @@
             <input type="text" id="name" name="name" required>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="name@gmail.com" required>
-            <div id="emailError" class="error" style="display: none;">This email is already in use. Please choose another.</div>
-
+            <input type="email" id="email" name="email" placeholder="name@gmail.com" value="<%= formData ? formData.email : '' %>" required>
+            <% if (errorMessage) { %>
+                <div id="emailError" class="error" style="color: red;"><%= errorMessage %></div>
+            <% } %>
+            
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
