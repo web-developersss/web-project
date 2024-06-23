@@ -38,6 +38,16 @@ app.use(express.static('views'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
+
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.redirect('/signin');
+    }
+}
+
+
 // Routes and handlers
 app.get('/', (req, res) => {
     customerdata.find()
@@ -78,14 +88,42 @@ app.get('/restaurant/:id', async (req, res) => {
     try {
         const restaurantId = req.params.id;
         const restaurant = await restaurantdata.findById(restaurantId);
-        if (!restaurant) {
-            return res.status(404).send('Restaurant not found');
-        }
+       
         res.render('details', { restaurant, user: req.session.user });
     } catch (error) {
         res.status(500).send(error.message);
     }
 });
+
+
+app.post('/details', async (req, res) => {
+    const { numberOfPeople, date, time, restaurantEmail } = req.body;
+
+    try {
+        // Check if user is authenticated
+        if (!req.session.user) {
+            return res.redirect('/signin');
+        }
+
+        const userEmail = req.session.user.email;
+
+        // Create reservation document
+        const reservation = new Reservation({
+            restaurantEmail,
+            customerEmail: userEmail,
+            numberOfPeople,
+            date,
+            time
+        });
+
+        await reservation.save();
+        res.redirect('/profile');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 
 app.get('/aboutUs', (req, res) => {
@@ -112,6 +150,7 @@ app.get('/restreq', (req, res) => {
 app.get('/details', (req, res) => {
     res.render('details', { user: req.session.user });
 });
+
 app.get('/profile', (req, res) => {
   res.render('profile', { user: req.session.user });
 });
