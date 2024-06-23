@@ -163,3 +163,56 @@ iframe.sidebar {
     padding-top: 60px;
     z-index: 999; /* Make sure sidebar is on top */
 }
+@media only screen and (max-width:768px){
+    .container {
+        padding: 10px;
+    }
+
+    .container h1 {
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    p {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .about-section {
+        padding: 20px;
+    }
+
+    .about-section img {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #im1, #im2 {
+        width: 100%;
+    }
+
+    .img-left, .img-right {
+        float: none;
+        margin: 0 auto 20px;
+        display: block;
+    }
+
+    div {
+        margin-bottom: 20px;
+    }
+
+    iframe.sidebar {
+        width: 100%;
+        height: 50px;
+        padding-top: 0;
+        z-index: 998;
+    }
+
+    .iframe-styling {
+        text-align: center;
+        position: relative;
+    }
+}

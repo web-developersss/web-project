@@ -52,3 +52,27 @@ body, html {
     text-align: right; /* Align the text to the right */
 border: none;
 }
+/* Mobile CSS */
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column; /* Stack items vertically */
+        padding: 10px;
+    }
+
+    .contact {
+        width: 100%; /* Full width for each item */
+        margin: 10px 0; /* Space out items vertically */
+    }
+
+    .contact h3 {
+        font-size: 18px;
+    }
+
+    .contact p {
+        font-size: 14px;
+    }
+
+    .contact a {
+        font-size: 18px;
+    }
+}

@@ -47,3 +47,20 @@ h1 {
     cursor: pointer;
 
 }
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+    #reservation-table {
+        margin: 10px auto;
+    }
+
+    #reservation-table th,
+    #reservation-table td {
+        padding: 6px;
+        font-size: 14px;
+    }
+
+    .action-buttons button {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}

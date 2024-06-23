@@ -7,7 +7,6 @@ body {
     padding: 0;
     background-color: #f4f4f4;
 }
-
 .container {
     max-width: 800px;
     margin: 20px auto;
@@ -16,7 +15,6 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -31,4 +29,14 @@ th, td {
 
 th {
     background-color:dimgrey;
+}
+@media (max-width: 768px) {.container {
+    padding: 10px;
+}
+table {
+    margin-top: 10px;
+}
+th, td {
+    padding: 6px;
+}
 }

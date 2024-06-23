@@ -20,10 +20,6 @@ body, html {
     display: inline-block;
   }
   
-   
-
-
-
 #category {
     margin-top: 40px;
     padding: 8px;
@@ -154,8 +150,6 @@ label {
     }
 }
 
-
-
 .image-gallery {
     position: relative;
     width: 100%;
@@ -214,9 +208,6 @@ label {
 border: none;
 }
 
-
-
-
 .container input[type=text] {
     padding: 10px;
     width: 325px;
@@ -253,4 +244,4 @@ margin-top: 20px;
     border-radius: 5px;
 }
 
-/* Add more styles as necessary */
+

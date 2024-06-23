@@ -105,3 +105,22 @@ input[type="password"] {
 #reser:hover {
     background-color: #0056b3;
 }
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px; /* Reduced padding on smaller screens */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: calc(100% - 20px); /* Adjusted input width to accommodate padding */
+    }
+
+    #logoutButton {
+        position: relative; /* Return to normal flow */
+        margin-top: 20px; /* Added margin top for spacing */
+        bottom: auto;
+        right: auto;
+    }
+}

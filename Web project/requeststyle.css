@@ -116,3 +116,45 @@ a {
 a:hover {
     text-decoration: underline;
 }
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+    .container, #request-list {
+        padding: 10px; /* Further reduced padding for smaller screens */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="time"],
+    select,
+    textarea {
+        padding: 6px; /* Further reduced padding for smaller screens */
+        font-size: 12px; /* Further reduced font size for smaller screens */
+    }
+
+    input[type="submit"] {
+        padding: 8px 12px; /* Adjusted padding for smaller screens */
+        font-size: 14px; /* Adjusted font size for smaller screens */
+    }
+
+    .request-item {
+        padding: 6px; /* Further reduced padding for smaller screens */
+        margin-bottom: 10px; /* Further reduced margin for smaller screens */
+    }
+
+    .request-item h2 {
+        font-size: 16px; /* Adjusted font size for smaller screens */
+    }
+
+    .request-item p {
+        font-size: 12px; /* Adjusted font size for smaller screens */
+    }
+
+    button {
+        padding: 5px 8px; /* Further reduced padding for smaller screens */
+        margin-right: 6px; /* Further reduced margin for smaller screens */
+        font-size: 12px; /* Further reduced font size for smaller screens */
+    }
+}

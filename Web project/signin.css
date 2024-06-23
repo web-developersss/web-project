@@ -98,11 +98,6 @@ input[type="submit"] {
     transform-origin: center top;
     transform: scaleY(1);
   }
-
-
-
-
-
 input[type="button"]:hover {
     background-color: #444; /* Darken color on hover */
 }
@@ -127,4 +122,104 @@ a:hover {
 }
 a[href="customerssignup.html"] {
     color: blue; /* Set color to blue for the specified link */
+}
+@media (max-width: 768px) {
+    /* General styles */
+body {
+    background-image: url('https://www.efinancialmodels.com/wp-content/uploads/2024/04/20240409-162147.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh; /* Use viewport height */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif; /* Ensure consistent font */
+}
+
+h1 {
+    color: black;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 50px; /* Adjust font size for smaller screens */
+    margin-bottom: 10px; /* Reduce margin */
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.9); /* Increase opacity */
+    width: 90%; /* Adjust width to fit smaller screens */
+    max-width: 400px; /* Limit maximum width */
+    padding: 20px;
+    margin: 20px; /* Adjust margin for spacing */
+    border-radius: 10px; /* Add border radius */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="email"],
+input[type="password"],
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Increase opacity */
+    border-radius: 5px;
+    border: none;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: black;
+    font-size: 16px; /* Adjust font size for smaller screens */
+}
+
+input[type="submit"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: dimgrey;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.25s ease-in-out; /* Add transition */
+    position: relative; /* Ensure stacking context for pseudo-element */
+}
+
+input[type="submit"]:hover {
+    background-color: #444;
+    transform-origin: center top;
+    transform: scaleY(1);
+}
+
+h2 {
+    color: black;
+    font-size: 14px; /* Adjust font size for smaller screens */
+    text-align: center; /* Center align for smaller screens */
+    margin: 10px 0;
+}
+
+a {
+    color: black;
+    font-size: 16px; /* Adjust font size for smaller screens */
+    margin-bottom: 20px;
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Add transition */
+    text-align: center; /* Center align for smaller screens */
+    display: block; /* Make links block-level */
+}
+
+a:hover {
+    color: #333; /* Darken color on hover */
+}
+
+a[href="customerssignup.html"] {
+    color: blue; /* Set color to blue for the specified link */
+}
 }

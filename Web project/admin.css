@@ -70,3 +70,29 @@ footer {
     bottom: 0;
     width: 100%;
 }
+/* Mobile CSS */
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0; /* Space out links vertically */
+    }
+
+    .dashboard-summary {
+        flex-direction: column; /* Stack items vertically */
+        padding: 10px;
+    }
+
+    .summary-item {
+        margin: 10px 0; /* Space out items vertically */
+        flex-basis: 100%; /* Full width for each item */
+    }
+
+    .latest-updates {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .latest-updates li {
+        padding: 5px;
+    }
+}

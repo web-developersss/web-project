@@ -155,3 +155,51 @@ input#star5:checked ~ label#star1:before {
     overflow-y: auto;
     padding-right: 10px;
 }
+/* Mobile CSS */
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .reservation-card {
+        flex-direction: column; /* Stack items vertically on mobile */
+    }
+
+    .reservation-card img {
+        width: 100%; /* Full width on mobile */
+        height: auto; /* Adjust height automatically */
+    }
+
+    .reservation-details {
+        padding: 10px;
+    }
+
+    button {
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    .modal-content {
+        margin: 30% auto;
+        padding: 10px;
+        width: 90%;
+    }
+
+    .rate {
+        float: none;
+        text-align: center;
+        padding: 0;
+    }
+
+    .rate label {
+        font-size: 25px;
+    }
+
+    .scrollable-reservations {
+        max-height: 300px;
+        padding-right: 5px;
+    }
+}
