@@ -10,6 +10,8 @@ const customerdata = require("./models/CustomersSchema");
 const restaurantdata = require("./models/Restaurantschema");
 const Reservation = require("./models/ReservationSchema");
 const { ObjectId } = mongoose.Types;
+const router = express.Router();
+
 
 // Initialize MongoDBStore for session storage
 const store = new MongoDBStore({
@@ -60,16 +62,17 @@ app.get('/', (req, res) => {
         });
 });
 
+
 app.get('/resturants', async (req, res) => {
     const perPage = 6;
     const page = parseInt(req.query.page) || 1;
 
     try {
-        const restaurants = await restaurantdata.find()
+        const restaurants = await restaurantdata.find({ status: { $ne: 'pending' } }) // Exclude restaurants with status 'pending'
             .skip((perPage * page) - perPage)
             .limit(perPage);
 
-        const count = await restaurantdata.countDocuments();
+        const count = await restaurantdata.countDocuments({ status: { $ne: 'pending' } }); // Count only non-pending restaurants
 
         res.render('resturants', {
             restaurants,
@@ -82,6 +85,9 @@ app.get('/resturants', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+// Other routes and middleware definitions
+
 
 
 app.get('/restaurant/:id', async (req, res) => {
@@ -156,6 +162,13 @@ app.get('/profile', (req, res) => {
 });
 
 
+app.get('/admin', (req, res) => {
+    // Check if admin is logged in
+        res.render('admin',{user: req.session.user}); // Render admin.ejs
+  
+});
+
+
 
 app.post('/customerssignup', async (req, res) => {
     const { email, name, password, phone, location } = req.body;
@@ -182,18 +195,36 @@ app.post('/customerssignup', async (req, res) => {
 
 app.post('/restreq', (req, res) => {
     const rdata = new restaurantdata(req.body);
+    
     rdata.save()
-        .then(() => { res.redirect('signin'); })
-        .catch((err) => { console.log(err); });
+        .then(() => { 
+            console.log('Restaurant data saved successfully');
+            res.redirect('/signin'); 
+        })
+        .catch((err) => { 
+            console.error('Error saving restaurant data:', err); 
+            res.status(500).send('Internal Server Error');
+        });
 });
 
 app.post('/signin', async (req, res) => {
     const { email, password } = req.body;
+
     try {
+        // Check if the user is admin
+        if (email === 'admin@123' && password === '123') {
+            // Admin login successful
+            req.session.user = { email: 'admin@123' }; // Store minimal user data in session
+            return res.redirect('/admin');
+        }
+
+        // Normal user login check
         const user = await customerdata.findOne({ email });
+
         if (!user) {
             return res.status(401).send("User not found");
         }
+
         if (user.password === password) {
             req.session.user = user; // Store user data in session
             res.redirect('/');
@@ -205,6 +236,8 @@ app.post('/signin', async (req, res) => {
         res.status(500).send("Internal server error");
     }
 });
+
+
 app.get('/logout', (req, res) => {
   req.session.destroy(err => {
       if (err) {
