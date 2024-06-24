@@ -3,138 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Management</title>
-    <style>
-        /* CSS styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
+    <title>User Management</title>
+    <link rel="stylesheet" href="viewRestraunts.css">
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background-color: #663300;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .restaurant-card {
-            border: 1px solid #ccc;
-            background-color: #fff;
-            margin-bottom: 20px;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .restaurant-name {
-            font-size: 24px;
-            color: #663300;
-            margin-bottom: 11px;
-        }
-
-        .restaurant-detail {
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .edit-button,
-        .delete-button {
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-        }
-
-        .edit-button:hover,
-        .delete-button:hover {
-            background-color: #663300;
-            color: #fff;
-        }
-
-        .delete-button {
-            background-color: #cc0000;
-            margin-right: 10px;
-        }
-
-        #restaurantForm {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        button[type="submit"] {
-            background-color: #663300;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #996633;
-        }
-    </style>
 </head>
-<body>
-    <header>
-        <h1>Restaurant Management</h1>
-    </header>
-    <div class="container">
-        <div id="restaurantList"></div>
 
-        <h2>Add Restaurant</h2>
+
+<body>
+    <div class="container">
+      <header> <h1>Manage Data</h1></header> 
+        <label for="type">Type:</label>
+        <select id="type" name="type" required>
+            <option value="Restaurant">Restaurant</option>
+            <option value="User">User</option>
+        </select>
+
+        <div id="restaurantList" class="list"></div>
+        <div id="userList" class="list hidden"></div>
+
         <form id="restaurantForm">
+            <h2>Add Restaurant</h2>
             <label for="restaurant-name">Restaurant Name:</label>
-            <input type="text" id="restaurant-name" name="restaurantName" required><br><br>
-    
-            <label for="restaurant-address">Address:</label>
-            <input type="text" id="restaurant-address" name="address" required><br><br>
-    
+            <input type="text" id="restaurant-name" name="restaurantName" required>
+
             <label for="restaurant-phone">Phone:</label>
-            <input type="text" id="restaurant-phone" name="phone" required><br><br>
-    
+            <input type="text" id="restaurant-phone" name="phone" required>
+
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="name@gmail.com" required><br><br>
-    
+            <input type="email" id="email" name="email" placeholder="name@gmail.com" required>
+
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
-    
+            <input type="password" id="password" name="password" required>
+
             <label for="location">Location:</label>
             <select id="location" name="location" required>
                 <option value="" selected disabled>Select your location</option>
@@ -144,17 +44,17 @@
                 <option value="Shrouk">Shrouk</option>
                 <option value="Sheikh Zayed">Sheikh Zayed</option>
                 <option value="6th of October">6th of October</option>
-            </select><br><br>
-    
+            </select>
+
             <label for="opening-time">Opening Time:</label>
-            <input type="time" id="opening-time" name="openingTime" required><br><br>
-    
+            <input type="time" id="opening-time" name="openingTime" required>
+
             <label for="closing-time">Closing Time:</label>
-            <input type="time" id="closing-time" name="closingTime" required><br><br>
-    
+            <input type="time" id="closing-time" name="closingTime" required>
+
             <label for="description">Description:</label>
-            <textarea id="description" name="description" required></textarea><br><br>
-    
+            <textarea id="description" name="description" required></textarea>
+
             <label for="category">Category:</label>
             <select id="category" name="category" required>
                 <option value="" selected disabled>Select a category</option>
@@ -163,99 +63,148 @@
                 <option value="After party">After party</option>
                 <option value="Breakfast">Breakfast</option>
                 <option value="Birthday">Birthday</option>
-            </select><br><br>
-    
+            </select>
+
             <label for="menu-url">Menu URL:</label>
-            <input type="url" id="menu-url" name="menuUrl" placeholder="http://example.com/menu" required><br><br>
-    
+            <input type="url" id="menu-url" name="menuUrl" placeholder="http://example.com/menu" required>
+
             <label for="location-url">Location URL:</label>
-            <input type="url" id="location-url" name="locationUrl" placeholder="http://example.com/location-map" required><br><br>
-    
+            <input type="url" id="location-url" name="locationUrl" placeholder="http://example.com/location-map" required>
+
             <label for="logo-url">Logo URL:</label>
-            <input type="url" id="logo-url" name="logoUrl" placeholder="http://example.com/logo" required><br><br>
-    
+            <input type="url" id="logo-url" name="logoUrl" placeholder="http://example.com/logo" required>
+
             <label for="photo-url">Photo URL:</label>
-            <input type="url" id="photo-url" name="photoUrl" placeholder="http://example.com/photo" required><br><br>
-    
-            <button type="submit">+</button>
+            <input type="url" id="photo-url" name="photoUrl" placeholder="http://example.com/photo" required>
+
+            <button type="submit" id="add-restaurant-button">+</button>
+        </form>
+
+        <form id="editRestaurantForm" class="hidden">
+            <h2>Edit Restaurant</h2>
+            <input type="hidden" id="edit-restaurant-index">
+
+            <label for="edit-restaurant-name">Restaurant Name:</label>
+            <input type="text" id="edit-restaurant-name" name="restaurantName" required>
+
+            <label for="edit-restaurant-phone">Phone:</label>
+            <input type="text" id="edit-restaurant-phone" name="phone" required>
+
+            <label for="edit-email">Email:</label>
+            <input type="email" id="edit-email" name="email" placeholder="name@gmail.com" required>
+
+            <label for="edit-password">Password:</label>
+            <input type="password" id="edit-password" name="password" required>
+
+            <label for="edit-location">Location:</label>
+            <select id="edit-location" name="location" required>
+                <option value="" selected disabled>Select your location</option>
+                <option value="Maadi">Maadi</option>
+                <option value="New Cairo">New Cairo</option>
+                <option value="Nasr city">Nasr city</option>
+                <option value="Shrouk">Shrouk</option>
+                <option value="Sheikh Zayed">Sheikh Zayed</option>
+                <option value="6th of October">6th of October</option>
+            </select>
+
+            <label for="edit-opening-time">Opening Time:</label>
+            <input type="time" id="edit-opening-time" name="openingTime" required>
+
+            <label for="edit-closing-time">Closing Time:</label>
+            <input type="time" id="edit-closing-time" name="closingTime" required>
+
+            <label for="edit-description">Description:</label>
+            <textarea id="edit-description" name="description" required></textarea>
+
+            <label for="edit-category">Category:</label>
+            <select id="edit-category" name="category" required>
+                <option value="" selected disabled>Select a category</option>
+                <option value="Fancy outing">Fancy outing</option>
+                <option value="Casual outing">Casual outing</option>
+                <option value="After party">After party</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Birthday">Birthday</option>
+            </select>
+
+            <label for="edit-menu-url">Menu URL:</label>
+            <input type="url" id="edit-menu-url" name="menuUrl" placeholder="http://example.com/menu" required>
+
+            <label for="edit-location-url">Location URL:</label>
+            <input type="url" id="edit-location-url" name="locationUrl" placeholder="http://example.com/location-map" required>
+
+            <label for="edit-logo-url">Logo URL:</label>
+            <input type="url" id="edit-logo-url" name="logoUrl" placeholder="http://example.com/logo" required>
+
+            <label for="edit-photo-url">Photo URL:</label>
+            <input type="url" id="edit-photo-url" name="photoUrl" placeholder="http://example.com/photo" required>
+
+            <button type="submit" id="save-restaurant-button">Save</button>
+        </form>
+
+        <form id="userForm" class="hidden">
+            <h2>Add User</h2>
+            <label for="user-name">Name:</label>
+            <input type="text" id="user-name" name="name" required>
+
+            <label for="user-email">Email:</label>
+            <input type="email" id="user-email" name="email" placeholder="name@gmail.com" required>
+
+            <label for="user-password">Password:</label>
+            <input type="password" id="user-password" name="password" required>
+
+            <label for="user-phone">Phone:</label>
+            <input type="text" id="user-phone" name="phone" required>
+
+            <label for="user-location">Location:</label>
+            <select id="user-location" name="location" required>
+                <option value="" selected disabled>Select your location</option>
+                <option value="Maadi">Maadi</option>
+                <option value="New Cairo">New Cairo</option>
+                <option value="Nasr city">Nasr city</option>
+                <option value="Shrouk">Shrouk</option>
+                <option value="Sheikh Zayed">Sheikh Zayed</option>
+                <option value="6th of October">6th of October</option>
+            </select>
+
+            <button type="submit" id="add-user-button">+</button>
+        </form>
+
+        <form id="editUserForm" class="hidden">
+            <h2>Edit User</h2>
+            <input type="hidden" id="edit-user-index">
+
+            <label for="edit-user-name">Name:</label>
+            <input type="text" id="edit-user-name" name="name" required>
+
+            <label for="edit-user-email">Email:</label>
+            <input type="email" id="edit-user-email" name="email" placeholder="name@gmail.com" required>
+
+            <label for="edit-user-password">Password:</label>
+            <input type="password" id="edit-user-password" name="password" required>
+
+            <label for="edit-user-phone">Phone:</label>
+            <input type="text" id="edit-user-phone" name="phone" required>
+
+            <label for="edit-user-location">Location:</label>
+            <select id="edit-user-location" name="location" required>
+                <option value="" selected disabled>Select your location</option>
+                <option value="Maadi">Maadi</option>
+                <option value="New Cairo">New Cairo</option>
+                <option value="Nasr city">Nasr city</option>
+                <option value="Shrouk">Shrouk</option>
+                <option value="Sheikh Zayed">Sheikh Zayed</option>
+                <option value="6th of October">6th of October</option>
+            </select>
+
+            <button type="submit" id="save-user-button">Save</button>
         </form>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('restaurantForm');
-            const restaurantList = document.getElementById('restaurantList');
-        
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-        
-                // Collecting form data
-                const newRestaurant = {
-                    name: document.getElementById('restaurant-name').value,
-                    address: document.getElementById('restaurant-address').value,
-                    phone: document.getElementById('restaurant-phone').value,
-                    email: document.getElementById('email').value,
-                    password: document.getElementById('password').value,
-                    location: document.getElementById('location').value,
-                    openingTime: document.getElementById('opening-time').value,
-                    closingTime: document.getElementById('closing-time').value,
-                    description: document.getElementById('description').value,
-                    category: document.getElementById('category').value,
-                    menuUrl: document.getElementById('menu-url').value,
-                    locationUrl: document.getElementById('location-url').value,
-                    logoUrl: document.getElementById('logo-url').value,
-                    photoUrl: document.getElementById('photo-url').value
-                };
-        
-                // Saving to local storage
-                let restaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
-                restaurants.push(newRestaurant);
-                localStorage.setItem('acceptedRestaurants', JSON.stringify(restaurants));
-        
-                // Update list display
-                displayRestaurants();
-            });
-        
-            // Function to display restaurants
-            function displayRestaurants() {
-                const restaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
-                restaurantList.innerHTML = '';
-                restaurants.forEach((restaurant, index) => {
-                    const div = document.createElement('div');
-                    div.innerHTML = `
-                        <h3>${restaurant.name}</h3>
-                        <p>Email: ${restaurant.email}</p>
-                        <p>Phone: ${restaurant.phone}</p>
-                        <p>Description: ${restaurant.description}</p>
-                        <button class="edit-button" onclick="editRestaurant(${index})">Edit</button>
-                        <button class="delete-button" onclick="deleteRestaurant(${index})">Delete</button>
-                    `;
-                    restaurantList.appendChild(div);
-                });
-            }
-        
-            // Function to delete restaurant
-            window.deleteRestaurant = function(index) {
-                let restaurants = JSON.parse(localStorage.getItem('acceptedRestaurants'));
-                restaurants.splice(index, 1);
-                localStorage.setItem('acceptedRestaurants', JSON.stringify(restaurants));
-                displayRestaurants();
-            };
-        
-            // Optional: Function to edit restaurant
-            window.editRestaurant = function(index) {
-                let restaurants = JSON.parse(localStorage.getItem('acceptedRestaurants'));
-                let restaurant = restaurants[index];
-                // Populate form with restaurant data for editing
-                document.getElementById('restaurant-name').value = restaurant.name;
-                document.getElementById('restaurant-address').value = restaurant.address;
-                // Add more fields as necessary
-                // Optionally: Update form to not add a new entry on submit but to edit the existing one
-            };
-        
-            // Initial display
-            displayRestaurants();
-        });
-        </script>
-        
+
+    <script src="viewRestraunts.js"></script>
 </body>
+
+
+
+
+
 </html>

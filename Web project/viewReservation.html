@@ -27,26 +27,6 @@
         </table>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Retrieve reservation data from localStorage
-            var reservations = JSON.parse(localStorage.getItem('reservations')) || [];
-
-            // Get the table body element
-            var tableBody = document.querySelector('tbody');
-
-            reservations.forEach(function(reservation, index) {
-                // Create a new row for each reservation
-                var newRow = tableBody.insertRow();
-                newRow.insertCell().textContent = index + 1; // Reservation ID
-                newRow.insertCell().textContent = reservation.rusername; // Restaurant Name
-                newRow.insertCell().textContent = reservation.username; // Username/Email
-                newRow.insertCell().textContent = reservation.date; // Date
-                newRow.insertCell().textContent = reservation.time; // Time
-                newRow.insertCell().textContent = reservation.number; // Guests
-                newRow.insertCell().textContent = reservation.status; // Status
-            });
-        });
-    </script>
+    <script src="reservations.js"></script>
 </body>
 </html>

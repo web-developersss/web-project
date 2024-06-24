@@ -1,42 +1,79 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
+   // Retrieve users, accepted restaurants, and request form data from local storage
+   var users = JSON.parse(localStorage.getItem('users')) || [];
+   var acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
+   var requestFormData = JSON.parse(localStorage.getItem('requestFormData')) || [];
 
-        // Collect form data
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            password: document.getElementById('password').value,
-            phone: document.getElementById('phone').value,
-            location: document.getElementById('location').value,
-            openingTime: document.getElementById('opening-time').value,
-            closingTime: document.getElementById('closing-time').value,
-            description: document.getElementById('description').value,
-            category: document.getElementById('category').value,
-            menuUrl: document.getElementById('menu-url').value,
-            locationUrl: document.getElementById('location-url').value,
-            logoUrl: document.getElementById('logo-url').value,
-            photoUrl: document.getElementById('photo-url').value
-        };
+   document.addEventListener('DOMContentLoaded', function() {
+       const form = document.querySelector('form');
+       form.addEventListener('submit', function(event) {
+           event.preventDefault(); // Prevent the default form submission
 
-        // Retrieve existing data from localStorage
-        let requests = JSON.parse(localStorage.getItem('requestFormData')) || [];
-        // Add the new formData to the array
-        requests.push(formData);
-        // Store updated array in localStorage
-        localStorage.setItem('requestFormData', JSON.stringify(requests));
+           var name = document.getElementById('name').value;
+           var email = document.getElementById('email').value.toLowerCase();
+           var password = document.getElementById('password').value;
+           var phone = document.getElementById('phone').value;
+           var location = document.getElementById('location').value;
+           var openingTime = document.getElementById('opening-time').value;
+           var closingTime = document.getElementById('closing-time').value;
+           var description = document.getElementById('description').value;
+           var category = document.getElementById('category').value;
+           var menuUrl = document.getElementById('menu-url').value;
+           var locationUrl = document.getElementById('location-url').value;
+           var logoUrl = document.getElementById('logo-url').value;
+           var photoUrl = document.getElementById('photo-url').value;
 
-          // Increment the request count
-          let requestCount = parseInt(localStorage.getItem('requestCount')) || 0;
-          requestCount++;
-          localStorage.setItem('requestCount', requestCount);
+           // Check if email already exists in users, acceptedRestaurants, or requestFormData
+           var emailExistsInUsers = users.some(function(user) {
+               return user.email === email;
+           });
+           var emailExistsInAcceptedRestaurants = acceptedRestaurants.some(function(restaurant) {
+               return restaurant.email === email;
+           });
+           var emailExistsInRequestFormData = requestFormData.some(function(request) {
+               return request.email === email;
+           });
 
-          
-        // Redirect to the page where requests are displayed
-        window.location.href = 'signin.html';
-    });
-});
+           // Show error message if email exists in any of the arrays
+           var emailError = document.getElementById('emailError');
+           if (emailExistsInUsers || emailExistsInAcceptedRestaurants || emailExistsInRequestFormData) {
+               emailError.style.display = 'block';
+               return;
+           } else {
+               emailError.style.display = 'none';
+           }
+
+           // Create a new request object
+           var formData = {
+               name: name,
+               email: email,
+               password: password,
+               phone: phone,
+               location: location,
+               openingTime: openingTime,
+               closingTime: closingTime,
+               description: description,
+               category: category,
+               menuUrl: menuUrl,
+               locationUrl: locationUrl,
+               logoUrl: logoUrl,
+               photoUrl: photoUrl
+           };
+
+           // Add the new formData to the requests array
+           requestFormData.push(formData);
+           // Store updated array in localStorage
+           localStorage.setItem('requestFormData', JSON.stringify(requestFormData));
+
+           // Increment the request count
+           let requestCount = parseInt(localStorage.getItem('requestCount')) || 0;
+           requestCount++;
+           localStorage.setItem('requestCount', requestCount);
+
+           // Redirect to the sign-in page
+           window.location.href = 'signin.html';
+       });
+   });
+
 
 
 
@@ -103,7 +140,14 @@ function acceptRequest(index) {
 
 
 function declineRequest(index) {
-    // Decline request logic
-    console.log('Declined Request:', index);
-}
+    let requests = JSON.parse(localStorage.getItem('requestFormData')) || [];
 
+    // Remove the declined request from the requests array
+    requests.splice(index, 1);
+
+    // Update local storage
+    localStorage.setItem('requestFormData', JSON.stringify(requests));
+
+    // Optionally reload or update the page content
+    location.reload();
+}
