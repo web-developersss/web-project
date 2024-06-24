@@ -289,6 +289,93 @@ app.post('/requests/:id/decline', async (req, res) => {
 });
 
 
+app.get('/viewReservation', async (req, res) => {
+    try {
+        const reservations = await Reservation.find();
+        res.render('viewReservation', { reservations, errorMessage: null });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+app.post('/addReservation', async (req, res) => {
+    try {
+        const { restaurantEmail, customerEmail, numberOfPeople, date, time } = req.body;
+
+        // Check if the restaurant exists
+        const restaurant = await restaurantdata.findOne({ email: restaurantEmail });
+        if (!restaurant) {
+            const reservations = await Reservation.find();
+            return res.render('viewReservation', { reservations, errorMessage: 'Restaurant not found' });
+        }
+
+        // Check if the customer exists
+        const customer = await customerdata.findOne({ email: customerEmail });
+        if (!customer) {
+            const reservations = await Reservation.find();
+            return res.render('viewReservation', { reservations, errorMessage: 'Customer not found' });
+        }
+
+        // Create and save the new reservation
+        const newReservation = new Reservation({
+            restaurantEmail,
+            customerEmail,
+            numberOfPeople,
+            date,
+            time
+        });
+
+        await newReservation.save();
+        res.redirect('/viewReservation');
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error adding reservation');
+    }
+});
+
+
+
+
+
+
+// Route to update a reservation by ID
+app.post('/updateReservation/:id', async (req, res) => {
+    try {
+        const { restaurantEmail, customerEmail, numberOfPeople, date, time } = req.body;
+        const updatedReservation = await Reservation.findByIdAndUpdate(req.params.id, {
+            restaurantEmail,
+            customerEmail,
+            numberOfPeople,
+            date,
+            time
+        });
+        if (!updatedReservation) {
+            return res.status(404).send('Reservation not found');
+        }
+        res.redirect('/viewReservation'); // Redirect back to viewReservation page
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error updating reservation');
+    }
+});
+
+// Route to delete a reservation by ID
+app.post('/deleteReservation/:id', async (req, res) => {
+    try {
+        const deletedReservation = await Reservation.findByIdAndDelete(req.params.id);
+        if (!deletedReservation) {
+            return res.status(404).send('Reservation not found');
+        }
+        res.redirect('/viewReservation'); // Redirect back to viewReservation page
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Error deleting reservation');
+    }
+});
+
 
 
 
