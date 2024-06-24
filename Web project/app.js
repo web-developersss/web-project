@@ -4,12 +4,14 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const mongoose = require('mongoose');
 const app = express();
 const port = 3001;
-const dbURI = 'mongodb+srv://hatem_1234567:F2EtlzpKM2v7t977@cluster0.zzlforu.mongodb.net/collection?retryWrites=true&w=majority&appName=Cluster0';
+const dbURI = 'mongodb+srv://hatem_1234567:qJg1kVrmmu20TX9V@cluster0.zzlforu.mongodb.net/collection?retryWrites=true&w=majority&appName=Cluster0';
 const path = require('path');
 const customerdata = require("./models/CustomersSchema");
 const restaurantdata = require("./models/Restaurantschema");
 const Reservation = require("./models/ReservationSchema");
 const { ObjectId } = mongoose.Types;
+const router = express.Router();
+
 
 // Initialize MongoDBStore for session storage
 const store = new MongoDBStore({
@@ -38,6 +40,16 @@ app.use(express.static('views'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
+
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+        next();
+    } else {
+        res.redirect('/signin');
+    }
+}
+
+
 // Routes and handlers
 app.get('/', (req, res) => {
     customerdata.find()
@@ -50,16 +62,17 @@ app.get('/', (req, res) => {
         });
 });
 
+
 app.get('/resturants', async (req, res) => {
     const perPage = 6;
     const page = parseInt(req.query.page) || 1;
 
     try {
-        const restaurants = await restaurantdata.find()
+        const restaurants = await restaurantdata.find({ status: { $ne: 'pending' } }) // Exclude restaurants with status 'pending'
             .skip((perPage * page) - perPage)
             .limit(perPage);
 
-        const count = await restaurantdata.countDocuments();
+        const count = await restaurantdata.countDocuments({ status: { $ne: 'pending' } }); // Count only non-pending restaurants
 
         res.render('resturants', {
             restaurants,
@@ -73,31 +86,51 @@ app.get('/resturants', async (req, res) => {
     }
 });
 
+// Other routes and middleware definitions
+
+
+
 app.get('/restaurant/:id', async (req, res) => {
     try {
         const restaurantId = req.params.id;
         const restaurant = await restaurantdata.findById(restaurantId);
-        if (!restaurant) {
-            return res.status(404).send('Restaurant not found');
-        }
+       
         res.render('details', { restaurant, user: req.session.user });
     } catch (error) {
         res.status(500).send(error.message);
     }
 });
 
-app.get('/restaurant/:id', (req, res) => {
-  const restaurantId = req.params.id;
-  restaurantdata.findById(restaurantId)
-      .then(restaurant => {
-          if (restaurant) {
-              res.render('/details', { user: req.session.user });
-          } else {
-              res.send('Restaurant not found');
-          }
-      })
-      .catch(err => console.log(err));
+
+app.post('/details', async (req, res) => {
+    const { numberOfPeople, date, time, restaurantEmail } = req.body;
+
+    try {
+        // Check if user is authenticated
+        if (!req.session.user) {
+            return res.redirect('/signin');
+        }
+
+        const userEmail = req.session.user.email;
+
+        // Create reservation document
+        const reservation = new Reservation({
+            restaurantEmail,
+            customerEmail: userEmail,
+            numberOfPeople,
+            date,
+            time
+        });
+
+        await reservation.save();
+        res.redirect('/profile');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
 });
+
+
 
 app.get('/aboutUs', (req, res) => {
     res.render('aboutUs', { user: req.session.user });
@@ -112,8 +145,9 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/customerssignup', (req, res) => {
-    res.render('customerssignup', { user: req.session.user });
+    res.render('customerssignup', { errorMessage: null, formData: {} });
 });
+
 
 app.get('/restreq', (req, res) => {
     res.render('restreq', { user: req.session.user });
@@ -122,33 +156,75 @@ app.get('/restreq', (req, res) => {
 app.get('/details', (req, res) => {
     res.render('details', { user: req.session.user });
 });
+
 app.get('/profile', (req, res) => {
   res.render('profile', { user: req.session.user });
 });
 
 
-
-app.post('/customerssignup', (req, res) => {
-    const cdata = new customerdata(req.body);
-    cdata.save()
-        .then(() => { res.redirect('/signin'); })
-        .catch((err) => { console.log(err); });
+app.get('/admin', (req, res) => {
+    // Check if admin is logged in
+        res.render('admin',{user: req.session.user}); // Render admin.ejs
+  
 });
+
+
+
+app.post('/customerssignup', async (req, res) => {
+    const { email, name, password, phone, location } = req.body;
+
+    try {
+        // Check if email already exists in customerdata or restaurantdata or if it's the admin email
+        const customer = await customerdata.findOne({ email });
+        const restaurant = await restaurantdata.findOne({ email });
+
+        if (email === 'admin@123' || customer || restaurant) {
+            return res.render('customerssignup', { errorMessage: 'This email is already in use. Please choose another.', formData: req.body });
+        }
+
+        // If email is not taken, create a new customer
+        const cdata = new customerdata({ name, email, password, phone, location });
+        await cdata.save();
+        res.redirect('/signin');
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 
 app.post('/restreq', (req, res) => {
     const rdata = new restaurantdata(req.body);
+    
     rdata.save()
-        .then(() => { res.redirect('signin'); })
-        .catch((err) => { console.log(err); });
+        .then(() => { 
+            console.log('Restaurant data saved successfully');
+            res.redirect('/signin'); 
+        })
+        .catch((err) => { 
+            console.error('Error saving restaurant data:', err); 
+            res.status(500).send('Internal Server Error');
+        });
 });
 
 app.post('/signin', async (req, res) => {
     const { email, password } = req.body;
+
     try {
+        // Check if the user is admin
+        if (email === 'admin@123' && password === '123') {
+            // Admin login successful
+            req.session.user = { email: 'admin@123' }; // Store minimal user data in session
+            return res.redirect('/admin');
+        }
+
+        // Normal user login check
         const user = await customerdata.findOne({ email });
+
         if (!user) {
             return res.status(401).send("User not found");
         }
+
         if (user.password === password) {
             req.session.user = user; // Store user data in session
             res.redirect('/');
@@ -160,6 +236,8 @@ app.post('/signin', async (req, res) => {
         res.status(500).send("Internal server error");
     }
 });
+
+
 app.get('/logout', (req, res) => {
   req.session.destroy(err => {
       if (err) {
@@ -168,6 +246,51 @@ app.get('/logout', (req, res) => {
       res.redirect('/');
   });
 });
+
+
+
+
+
+app.get('/requests', async (req, res) => {
+    try {
+        const pendingRestaurants = await restaurantdata.find({ status: 'pending' });
+
+        res.render('requests', { restaurants: pendingRestaurants });
+    } catch (error) {
+        console.error('Error fetching pending restaurants:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+app.post('/requests/:id/accept', async (req, res) => {
+    const restaurantId = req.params.id;
+
+    try {
+        await restaurantdata.findByIdAndUpdate(restaurantId, { status: 'accepted' });
+        res.redirect('/requests'); // Redirect back to view requests page
+    } catch (err) {
+        console.error('Error accepting restaurant:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+app.post('/requests/:id/decline', async (req, res) => {
+    const restaurantId = req.params.id;
+
+    try {
+        await restaurantdata.findByIdAndDelete(restaurantId);
+        res.redirect('/requests'); // Redirect back to view requests page
+    } catch (err) {
+        console.error('Error declining restaurant:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+
+
 
 
 
