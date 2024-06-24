@@ -60,6 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+
 document.getElementById('reservation-button').addEventListener('click', function() {
     var mode = localStorage.getItem('mode'); // Get mode from local storage
     var loginPrompt = document.getElementById('login-prompt');
