@@ -1,13 +1,5 @@
 // Function to filter and display restaurants based on the selected category
-function filterByCategory(category) {
-    const acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
-    if (category && category !== "All") {
-        const filteredRestaurants = acceptedRestaurants.filter(restaurant => restaurant.category === category);
-        renderRestaurants(filteredRestaurants);
-    } else {
-        renderRestaurants(acceptedRestaurants); // Show all if "All" is selected
-    }
-}
+
 
 // Event listener for category selection form
 document.getElementById('category-form').addEventListener('submit', function(event) {
@@ -16,31 +8,7 @@ document.getElementById('category-form').addEventListener('submit', function(eve
     filterByCategory(selectedCategory);
 });
 
-// Function to show nearby restaurants
-function showNearbyRestaurants() {
-    const username = localStorage.getItem('username');
-    if (!username || localStorage.getItem('mode') === '0') {
-        alert('Please sign in to see nearby options.');
-        window.location.href = 'signin.html';
-        return;
-    }
 
-    // Get user location
-    const users = JSON.parse(localStorage.getItem('users')) || [];
-    const user = users.find(u => u.email === username);
-
-    if (!user) {
-        alert('User information not found.');
-        return;
-    }
-
-    const userLocation = user.location;
-    const acceptedRestaurants = JSON.parse(localStorage.getItem('acceptedRestaurants')) || [];
-
-    // Filter restaurants by location
-    const nearbyRestaurants = acceptedRestaurants.filter(restaurant => restaurant.location === userLocation);
-    renderRestaurants(nearbyRestaurants);
-}
 
 // Event listener for the "See Nearby Options?" checkbox
 document.getElementById('checkbox').addEventListener('change', function() {
@@ -56,48 +24,57 @@ document.addEventListener('DOMContentLoaded', function() {
     filterByCategory("All"); // Display all by default
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    // This code runs after the DOM has fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input');
+    const restaurantsContainer = document.getElementById('restaurants');
 
-    // Adding event listener to the search form
-    let searchForm = document.getElementById('search-form');
-    if (searchForm) {
-        searchForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission behavior
-            
-            // Get the value entered in the search input
-            let searchQueryInput = searchForm.querySelector('input[name="q"]');
-            if (searchQueryInput) {
-                let searchQuery = searchQueryInput.value.toLowerCase().trim();
-                
-                // Loop through each restaurant link
-                let restaurantLinks = document.querySelectorAll('.restaurant');
-                let found = false;
-                restaurantLinks.forEach(function(link) {
-                    let restaurantName = link.textContent.toLowerCase(); // Get the restaurant name
-                    // Check if the search query matches the restaurant name
-                    if (restaurantName.includes(searchQuery)) {
-                        let restaurantUrl = link.getAttribute('href'); // Get the URL of the matching restaurant link
-                        if (restaurantUrl) {
-                            window.location.href = restaurantUrl; // Navigate to the restaurant page
-                            found = true;
-                        }
-                        return; // Exit the loop once a match is found
-                    }
-                });
-
-                // If no matching restaurant is found, display an alert
-                if (!found) {
-                    alert("No matching restaurant found!");
-                }
-            } else {
-                console.error("Search query input element not found.");
+    // Function to fetch restaurants based on search input
+    const fetchRestaurants = async (searchTerm) => {
+        try {
+            const response = await fetch(`/search?name=${searchTerm}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        });
-    } else {
-        console.error("Search form element not found.");
-    }
+            const restaurants = await response.json();
+            displayRestaurants(restaurants);
+        } catch (error) {
+            console.error('Error fetching restaurants:', error);
+        }
+    };
+
+    // Function to display fetched restaurants
+    const displayRestaurants = (restaurants) => {
+        restaurantsContainer.innerHTML = ''; // Clear previous results
+        if (restaurants.length === 0) {
+            restaurantsContainer.innerHTML = '<p>No matching restaurants found</p>';
+        } else {
+            restaurants.forEach(restaurant => {
+                const restaurantElement = document.createElement('div');
+                restaurantElement.classList.add('restaurant');
+                restaurantElement.innerHTML = `
+                    <a href="/restaurant/${restaurant._id}">
+                        <img src="${restaurant.logoUrl}" alt="${restaurant.name}">
+                        <h3>${restaurant.name}</h3>
+                    </a>
+                `;
+                restaurantsContainer.appendChild(restaurantElement);
+            });
+        }
+    };
+
+    // Event listener for input changes (typing)
+    searchInput.addEventListener('input', (event) => {
+        const searchTerm = event.target.value.trim();
+        if (searchTerm.length > 0) {
+            fetchRestaurants(searchTerm);
+        } else {
+            restaurantsContainer.innerHTML = ''; // Clear when input is empty
+        }
+    });
 });
+
+
+
 let slideIndex = 0;
 showSlides();
 

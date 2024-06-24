@@ -137,8 +137,9 @@ app.get('/aboutUs', (req, res) => {
 });
 
 app.get('/signin', (req, res) => {
-    res.render('signin', { user: req.session.user });
+    res.render('signin', { user: req.session.user, errorMessage: null });
 });
+
 
 app.get('/contact', (req, res) => {
     res.render('contact', { user: req.session.user });
@@ -206,7 +207,6 @@ app.post('/restreq', (req, res) => {
             res.status(500).send('Internal Server Error');
         });
 });
-
 app.post('/signin', async (req, res) => {
     const { email, password } = req.body;
 
@@ -222,14 +222,14 @@ app.post('/signin', async (req, res) => {
         const user = await customerdata.findOne({ email });
 
         if (!user) {
-            return res.status(401).send("User not found");
+            return res.status(401).render('signin', { errorMessage: "Incorrect email or password" });
         }
 
         if (user.password === password) {
             req.session.user = user; // Store user data in session
             res.redirect('/');
         } else {
-            res.status(401).send("Incorrect email or password");
+            res.status(401).render('signin', { errorMessage: "Incorrect email or password" });
         }
     } catch (error) {
         console.error("Error:", error);
@@ -376,6 +376,23 @@ app.post('/deleteReservation/:id', async (req, res) => {
     }
 });
 
+
+
+
+app.get('/search', async (req, res) => {
+    const searchTerm = req.query.name;
+    try {
+        const restaurants = await restaurantdata.find({
+            name: { $regex: new RegExp(searchTerm, 'i') }, // Case-insensitive search
+            status: { $ne: 'pending' } // Exclude restaurants with status 'pending'
+        });
+
+        res.json(restaurants);
+    } catch (err) {
+        console.error('Error searching restaurants:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 
 

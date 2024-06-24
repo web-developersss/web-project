@@ -128,3 +128,12 @@ a:hover {
 a {
     color: blue; /* Set color to blue for the specified link */
 }
+
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+}

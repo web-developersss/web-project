@@ -26,7 +26,8 @@
             <input type="password" id="password" name="password" value="<%= formData ? formData.password : '' %>" required>
 
             <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="phone" value="<%= formData ? formData.phone : '' %>" required>
+<input type="text" id="phone" name="phone" pattern="[0-9]+" title="Please enter only numeric characters (0-9)" value="<%= formData ? formData.phone : '' %>" required>
+<div class="error-message" id="phone-error" style="display: none;">Please enter only numeric characters (0-9).</div>
 
             <label for="location">Location:</label>
             <select id="location" name="location" value="<%= formData ? formData.location : '' %>" required>
