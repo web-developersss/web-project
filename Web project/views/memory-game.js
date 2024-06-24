@@ -2,6 +2,7 @@
 function openMemoryGame() {
     let modal = document.getElementById('memory-game-modal');
     modal.style.display = "flex";
+    setTimeout(() => modal.querySelector('.modal-content').classList.add('show'), 10);
     document.getElementById('main-content').classList.add('blur'); // Add blur to main content
 
     // Initialize the memory game when the modal is opened
@@ -11,7 +12,8 @@ function openMemoryGame() {
 // Function to close the memory game modal
 function closeMemoryGame() {
     let modal = document.getElementById('memory-game-modal');
-    modal.style.display = "none";
+    modal.querySelector('.modal-content').classList.remove('show');
+    setTimeout(() => modal.style.display = "none", 300);
     document.getElementById('main-content').classList.remove('blur'); // Remove blur from main content
 }
 
