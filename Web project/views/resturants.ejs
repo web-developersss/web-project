@@ -8,8 +8,7 @@
 
 </head>
 <body>
-    <iframe src="navbar.html" class="iframe-styling"></iframe>
-
+    <%- include("navbar.ejs") %>
     <div class="image-gallery">
         <div class="slide fade">
             <img src="https://sizzleregypt.com/qiqijag/2021/01/maadibanner.png" alt="Image 1">
@@ -53,11 +52,10 @@
     
     
 
-
     <div class="container">
         <form id="category-form" action="#">
             <select id="category" name="category" required>
-                <option value="All" selected >All</option>
+                <option value="All" selected>All</option>
                 <option value="Fancy outing">Fancy outing</option>
                 <option value="Casual outing">Casual outing</option>
                 <option value="After party">After party</option>
@@ -66,37 +64,46 @@
             </select>
             <input id="submit" type="submit" value="Choose" title="Choose this category">
         </form>
-                
-            
-
-        <form id="search-form" action="/search" method="get" target="_self">
-            <input type="text" placeholder="Want to search for a restaurant?" name="q">
-            <input type="submit" value="Search">
-        </form>
-        <!-- HTML for the search bar -->
-    
-
-        <br>
-            <label for="checkbox">See Nearby Options?</label>
-            <input type="checkbox" id="checkbox" name="checkbox">
-       
-    
-
-
-</div>
         
-        
+        <input type="text" id="search-input" placeholder="Type something...">
 
 
+        <label for="checkbox">See Nearby Options?</label>
+        <input type="checkbox" id="checkbox" name="checkbox">
+    </div>
 
-<section class="restaurants" id="restaurants">
+    <section class="restaurants" id="restaurants">
+        <% if (restaurants && restaurants.length > 0) { %>
+            <% restaurants.forEach(restaurant => { %>
+                <div class="restaurant">
+                    <a href="/restaurant/<%= restaurant._id %>">
+                        <img src="<%= restaurant.logoUrl %>" alt="<%= restaurant.name %>">
+                        <h3><%= restaurant.name %></h3>
+                    </a>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <p>No restaurants available</p>
+        <% } %>
+    </section>
+
+    <div class="pagination">
+        <% if (current > 1) { %>
+            <a href="/resturants?page=<%= current - 1 %>">Previous</a>
+        <% } %>
+
+        <% for (let i = 1; i <= pages; i++) { %>
+            <a href="/resturants?page=<%= i %>" class="<%= current === i ? 'active' : '' %>"><%= i %></a>
+        <% } %>
+
+        <% if (current < pages) { %>
+            <a href="/resturants?page=<%= current + 1 %>">Next</a>
+        <% } %>
+    </div>
+
    
-</section>
+    <script src="restaurants.js"></script>
 
-<script src="restaurants.js">
-   
-    
-</script>
     
 </body>
 

@@ -2,16 +2,17 @@
 <html lang="en">
 
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Sign-up</title>
     <link rel="stylesheet" href="restreq.css">
     <link rel="icon" href="https://cdn5.f-cdn.com/contestentries/70431/10651466/53406793a0826_thumb900.jpg" type="image/x-icon"/>
-
 </head>
+
 <body>
     <div class="container">
         <h2>Request Restaurant Sign-Up</h2>
-        <form id="requestForm">
+        <form action="/restreq" method="post" id="requestForm" onsubmit="return validateForm(event)">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
@@ -60,20 +61,77 @@
 
             <label for="location-url">Location URL:</label>
             <input type="url" id="location-url" name="locationUrl" placeholder="http://example.com/location-map" required>
+            <div id="locationError" class="error" style="display: none;">Invalid location URL. Please enter a valid Google Maps URL.</div>
 
             <label for="logo-url">Logo URL:</label>
             <input type="url" id="logo-url" name="logoUrl" placeholder="http://example.com/logo" required>
+            <div id="logoError" class="error" style="display: none;">Invalid image URL. Please enter a valid image URL.</div>
 
             <label for="photo-url">Photo URL:</label>
             <input type="url" id="photo-url" name="photoUrl" placeholder="http://example.com/photo" required>
+            <div id="photoError" class="error" style="display: none;">Invalid image URL. Please enter a valid image URL.</div>
 
             <input type="submit" value="Request Sign-Up">
         </form>
     </div>
 
+    <script>
+        function isValidImageUrl(url) {
+            return fetch(url, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok && response.headers.get('Content-Type').includes('image')) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching image:', error);
+                    return false;
+                });
+        }
 
-    <script src="request.js"></script>
+        function isValidLocationUrl(url) {
+            return url.startsWith("https://maps.app.goo.gl/");
+        }
 
+        async function validateForm(event) {
+            event.preventDefault(); // Prevent the form from submitting by default
+
+            const locationUrl = document.getElementById('location-url').value;
+            const logoUrl = document.getElementById('logo-url').value;
+            const photoUrl = document.getElementById('photo-url').value;
+
+            let isValid = true;
+
+            if (!isValidLocationUrl(locationUrl)) {
+                document.getElementById('locationError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('locationError').style.display = 'none';
+            }
+
+            if (!(await isValidImageUrl(logoUrl))) {
+                document.getElementById('logoError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('logoError').style.display = 'none';
+            }
+
+            if (!(await isValidImageUrl(photoUrl))) {
+                document.getElementById('photoError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('photoError').style.display = 'none';
+            }
+
+            if (isValid) {
+                document.getElementById('requestForm').submit(); // Manually submit the form if valid
+            }
+
+            return isValid;
+        }
+    </script>
 </body>
 
 </html>
